@@ -10,6 +10,7 @@ body {
     margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; 
 }
 
+
 $custom-basic-palette:(
     //#97A1D7
     50: #e8e9f4,
@@ -17,7 +18,7 @@ $custom-basic-palette:(
     200: #a3a8de,
     300: #8087d3,
     400: #6971cb,
-    500: green,
+    500: #97A1D7,
     600: #4a62b9,
     700: #3f55b0,
     800: #3548a7,
@@ -167,4 +168,12 @@ $custom-theme: mat.define-light-theme((
 @include mat.all-component-themes($custom-theme);
  
 
-
+:root {
+    --color-primary: #{mat.get-color-from-palette($custom-primary, 500)};
+    --color-secondary: #{mat.get-color-from-palette($custom-basic, 500)};
+    --color-tertiary: #{mat.get-color-from-palette($custom-accent, 500)};
+    --color-warn: #{mat.get-color-from-palette($custom-warn, 500)};
+    --color-info: #2F80ED;
+    --color-success: #27AE60;
+    --color-error: #990000;
+}
