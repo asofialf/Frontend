@@ -1,0 +1,18 @@
+h1{
+    color: var(--color-primary)
+}
+
+.itinerary-container{
+    margin: 50px 50px 50px 50px;
+}
+
+.label{
+    color:  var(--color-text)
+}
+
+.general-data{
+    background: var(--color-secondary);
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+    width: 500px;
+} 

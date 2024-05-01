@@ -1,1 +1,100 @@
-<p>create-new-itinerary works!</p>
+@switch (stepperOrientation | async) {
+    @case ('horizontal') {
+      <div>Make your screen smaller to see a vertical stepper</div>
+    }
+    @case ('vertical') {
+      <div>Make your screen larger to see a horizontal stepper</div>
+    }
+  }
+
+
+<div class="itinerary-container">
+    <div class="flex flex-column">
+        <div class="flex align-items-center justify-content-start h-4rem font-bold border-round m-2">
+            <h1>Mi itinerario</h1>
+        </div>
+    </div>
+    <mat-stepper
+        labelPosition="bottom"
+        class="itinerary-register-stepper"
+        [orientation]="(stepperOrientation | async)!">
+
+        
+            <mat-step [stepControl]="firstFormGroup" label="Datos Generales">
+
+            <div class="flex flex-column general-data">
+                <div class="flex m-5">   
+                    <h3 class="label"> Agregar Información General del itinerario </h3>
+                </div>
+
+                <div class="flex ml-5 mb-5 align-items-center">
+                    <form [formGroup]="firstFormGroup" class="flex flex-column">
+
+                        <mat-form-field>
+                            <mat-label>Cargar foto del bus</mat-label>
+                            <input matInput placeholder="jpeg/png" formControlName="firstCtrl" required>
+                        </mat-form-field>
+
+                        <mat-form-field>
+                            <mat-label>Hora de inicio de circulación</mat-label>
+                            <input matInput placeholder="ej. Transvasa SAC" formControlName="firstCtrl" required>
+                        </mat-form-field>
+
+                        <mat-form-field>
+                            <mat-label>Hora de fin de circulación</mat-label>
+                            <input matInput placeholder="ej. Transvasa SAC" formControlName="firstCtrl" required>
+                        </mat-form-field>
+
+                        <mat-form-field>
+                            <mat-label>Días de circulación</mat-label>
+                            <input matInput placeholder="ej. Transvasa SAC" formControlName="firstCtrl" required>
+                        </mat-form-field>
+
+                        <div class="flex justify-content-end">
+                            <button mat-raised-button color="primary" matStepperNext class="">Siguiente</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+            </mat-step>
+
+            <mat-step [stepControl]="secondFormGroup" label="Registra tu línea">
+            <form [formGroup]="secondFormGroup">
+                <mat-form-field>
+                <mat-label>Registra tu línea</mat-label>
+                <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY"
+                        required>
+                </mat-form-field>
+                <div>
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-button matStepperNext>Next</button>
+                </div>
+            </form>
+            </mat-step>
+
+            <mat-step [stepControl]="thirdFormGroup" label="Pago">
+            <form [formGroup]="thirdFormGroup">
+                <mat-form-field>
+                <mat-label>Pago</mat-label>
+                <input matInput formControlName="thirdCtrl" placeholder="Ex. 12345678" required>
+                </mat-form-field>
+                <div>
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-button matStepperNext>Next</button>
+                </div>
+            </form>
+            </mat-step>
+
+            <mat-step>
+            <ng-template matStepLabel>Done</ng-template>
+            <p>You are now done.</p>
+            <div>
+                <button mat-button matStepperPrevious>Back</button>
+            </div>
+            </mat-step>
+
+        
+    </mat-stepper>
+
+</div>
