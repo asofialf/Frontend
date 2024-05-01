@@ -1,1 +1,170 @@
 /* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as mat;
+@import url('https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600&display=swap');
+
+html, 
+body { 
+    height: 100%; 
+}
+body { 
+    margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; 
+}
+
+$custom-basic-palette:(
+    //#97A1D7
+    50: #e8e9f4,
+    100: #c6c9e9,
+    200: #a3a8de,
+    300: #8087d3,
+    400: #6971cb,
+    500: green,
+    600: #4a62b9,
+    700: #3f55b0,
+    800: #3548a7,
+    900: #2434a0,
+    A100: #bdc0f9,
+    A200: #8f94f2,
+    A400: #97A1D7,
+    A700: #203bd9,
+    contrast: (
+        50: #000,
+        100: #000,
+        200: #000,
+        300: #000,
+        400: #fff,
+        500: #fff,
+        600: #fff,
+        700: #fff,
+        800: #fff,
+        900: #fff,
+        A100: #000,
+        A200: #000,
+        A400: #fff,
+        A700: #fff,
+    )
+);
+
+$custom-primary-palette: (
+  50: #e6e8fa,  
+  100: #c5c9f5,
+  200: #a2a7f0, 
+  300: #7f85eb,
+  400: #6670e7, 
+  500: #556BDA,
+  600: #4d62d4,
+  700: #4255cd, 
+  800: #3848c6,
+  900: #2734bc, 
+  A100: #bdbdff, 
+  A200: #8f8fff, 
+  A400: #556BDA, 
+  A700: #203bd9, 
+  contrast: (
+    50: #000,
+    100: #000,
+    200: #000,
+    300: #000,
+    400: #fff,
+    500: #fff,
+    600: #fff,
+    700: #fff,
+    800: #fff,
+    900: #fff,
+    A100: #000,
+    A200: #000,
+    A400: #fff,
+    A700: #fff,
+  )
+);
+
+$custom-secondary-palette: (
+    50: #fff3e0, 
+    100: #ffecb3,
+    200: #ffe583,
+    300: #ffdd52,
+    400: #ffd32e,
+    500: #FFA45A,
+    600: #ff9b3b, 
+    700: #ff9120,
+    800: #ff8700, 
+    900: #ff7500,
+    A100: #ffffff,
+    A200: #ffe0b2, 
+    A400: #FFA45A,
+    A700: #ff5c00,
+    contrast: (
+        50: #000,
+        100: #000,
+        200: #000,
+        300: #000,
+        400: #000,
+        500: #fff,
+        600: #fff,
+        700: #fff,
+        800: #fff,
+        900: #fff,
+        A100: #000,
+        A200: #000,
+        A400: #fff,
+        A700: #fff,
+    )
+
+);
+
+$custom-warn-palette:(
+    50: #fff8e1,
+    100: #ffefb4,
+    200: #ffe785,
+    300: #ffdd55,
+    400: #ffd33f,
+    500: #E2B93B,
+    600: #ff9b3b,
+    700: #ff9120,
+    800: #ff8700,
+    900: #ff7500,
+    A100: #ffffff,
+    A200: #ffe0b2,
+    A400: #FFA45A,
+    A700: #ff5c00,
+    contrast: (
+        50: #000,
+        100: #000,
+        200: #000,
+        300: #000,
+        400: #000,
+        500: #fff,
+        600: #fff,
+        700: #fff,
+        800: #fff,
+        900: #fff,
+        A100: #000,
+        A200: #000,
+        A400: #fff,
+        A700: #fff,
+    )
+);
+
+$custom-typography: mat.define-typography-config(
+    $font-family: 'Urbanist, sans-serif',
+);
+
+$custom-basic: mat.define-palette($custom-basic-palette);
+$custom-primary: mat.define-palette($custom-primary-palette);
+$custom-accent: mat.define-palette($custom-secondary-palette);
+$custom-warn: mat.define-palette($custom-warn-palette);
+
+
+$custom-theme: mat.define-light-theme((
+    color: (
+        basic: $custom-basic,
+        primary: $custom-primary,
+        accent: $custom-accent,
+        warn: $custom-warn,
+    ),
+    typography: $custom-typography,
+));
+
+@include mat.all-component-themes($custom-theme);
+ 
+
+
