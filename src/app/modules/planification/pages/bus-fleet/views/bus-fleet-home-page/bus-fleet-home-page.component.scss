@@ -19,3 +19,9 @@ p{
 .bordered-card:hover {
   border-color: #556BDA;
 }
+
+.header-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
