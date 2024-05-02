@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { RouterOutlet } from '@angular/router';
+import {RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import {MatListModule} from '@angular/material/list';
 import { MatIcon } from '@angular/material/icon';
@@ -8,11 +8,13 @@ import { MatIcon } from '@angular/material/icon';
 @Component({
   selector: 'app-main-layout',
   standalone: true,
-  imports: [ 
+  imports: [
     RouterOutlet,
     MatSidenavModule,
     MatListModule,
-    MatIcon
+    MatIcon,
+    RouterLink,
+    RouterLinkActive
   ],
   templateUrl: './main-layout.component.html',
   styleUrl: './main-layout.component.scss'
