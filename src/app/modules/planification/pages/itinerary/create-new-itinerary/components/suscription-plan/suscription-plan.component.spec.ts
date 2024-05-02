@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GeneralDataComponent } from './general-data.component';
+import { SuscriptionPlanComponent } from './suscription-plan.component';
 
-describe('GeneralDataComponent', () => {
-  let component: GeneralDataComponent;
-  let fixture: ComponentFixture<GeneralDataComponent>;
+describe('SuscriptionPlanComponent', () => {
+  let component: SuscriptionPlanComponent;
+  let fixture: ComponentFixture<SuscriptionPlanComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [GeneralDataComponent]
+      imports: [SuscriptionPlanComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(GeneralDataComponent);
+    fixture = TestBed.createComponent(SuscriptionPlanComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

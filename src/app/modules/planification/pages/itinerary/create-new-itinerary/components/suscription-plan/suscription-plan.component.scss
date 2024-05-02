@@ -1,0 +1,31 @@
+mat-card-title{
+    color: white;
+    margin: 3px;
+    justify-content: center;
+}
+
+.plan-card{
+    background: var(--color-tertiary);
+    border-radius: 8px;
+    width: auto;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+    
+}
+
+.features-list {
+    list-style: none; /* Elimina los bullets de la lista */
+    padding: 0; /* Elimina el padding predeterminado */
+    margin: 20px 0; /* Espacio antes y después de la lista */
+}
+
+.features-list li {
+    padding: 5px 0; /* Espacio entre elementos de la lista */
+    margin-left: 10px; /* Alineación de texto a la izquierda */
+    padding-left: 10px; /* Espacio entre el borde y el texto */
+}
+
+.price {
+    font-size: 3em;
+    font-weight: bold;
+    color: white;
+}
