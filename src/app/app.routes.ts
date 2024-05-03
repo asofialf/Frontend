@@ -13,8 +13,23 @@ export const routes: Routes = [
         ,
         {
           path:'bus-fleet',
-          title:'bus-fleet',
-          loadComponent: () => import('./context/planification/interface/pages/bus-fleet/bus-fleet-home-page/bus-fleet-home-page.component').then(m=>m.BusFleetHomePageComponent)
+          children:[
+            {
+              path:'',
+              title:'bus-fleet',
+              loadComponent: () => import('./context/planification/interface/pages/bus-fleet/bus-fleet-home-page/bus-fleet-home-page.component').then(m=>m.BusFleetHomePageComponent),
+            },
+            {
+              path:'buses',
+              title:'Buses',
+              loadComponent:()=> import("./context/planification/interface/pages/bus-fleet/bus-administration/bus-administration.component").then(m=>m.BusAdministrationComponent)
+            },
+            {
+              path:'drivers',
+              title:'Drivers',
+              loadComponent:()=> import("./context/planification/interface/pages/bus-fleet/driver-administration/driver-administration.component").then(m=>m.DriverAdministrationComponent)
+            }
+          ]
         },
         {
           path: 'itinerary',
