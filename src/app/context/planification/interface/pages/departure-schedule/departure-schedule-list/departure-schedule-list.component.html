@@ -1,27 +1,29 @@
 <div class="departure-container">
   <h1>Registro de horarios de salida</h1>
-  <button (click)="goToCreateNewDepartureSchedule()">Crear nuevo horario</button>
+  <button (click)="goToCreateNewDepartureSchedule()">
+    Crear nuevo horario
+  </button>
 
   <table>
     <thead>
-    <tr>
-      <th>Unidad de bus</th>
-      <th>Conductor</th>
-      <th>Bus</th>
-      <th>Fecha</th>
-      <th>Inicio de jornada</th>
-    </tr>
+      <tr>
+        <th>Unidad de bus</th>
+        <th>Conductor</th>
+        <th>Bus</th>
+        <th>Fecha</th>
+        <th>Inicio de jornada</th>
+      </tr>
     </thead>
     <tbody>
-    <ng-container *ngFor="let schedule of departureSchedules">
-      <tr>
-        <td>{{ schedule.busUnit }}</td>
-        <td>{{ schedule.driver }}</td>
-        <td>{{ schedule.bus }}</td>
-        <td>{{ schedule.date }}</td>
-        <td>{{ schedule.departures[0] }}</td>
-      </tr>
-    </ng-container>
+      <ng-container *ngFor="let schedule of departureSchedules">
+        <tr>
+          <td>{{ schedule.bus_unit_id }}</td>
+          <td>{{ schedule.driver }}</td>
+          <td>{{ schedule.bus }}</td>
+          <td>{{ schedule.date }}</td>
+          <td>{{ schedule.departures[0] }}</td>
+        </tr>
+      </ng-container>
     </tbody>
   </table>
 </div>
