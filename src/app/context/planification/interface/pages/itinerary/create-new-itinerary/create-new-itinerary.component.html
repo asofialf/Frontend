@@ -186,73 +186,65 @@
             </mat-step>
 
             <mat-step [stepControl]="thirdFormGroup" label="Pago">
-                <div class="grid ">
-
-                    <div class="col-5 mt-4 justify-content-center ">
-                        <app-subscription-plan></app-subscription-plan>
+                <div class="grid">
+                    <div class="col">
+                        <div >
+                            <app-subscription-plan></app-subscription-plan>
+                        </div>
                     </div>
+                    <div class="col">
 
-                    <div class="col-5 ml-2 mr-2 mt-5">
-
-                        <div class="payment">
+                        <div class="payment mb-5">
                             <app-payment-detail></app-payment-detail>
                         </div>
 
-                        <div>
+                        <form [formGroup]="thirdFormGroup" class="flex flex-column">
+                            <mat-card>
+                                <div class="mr-4 ml-4 mt-2">
+                                <mat-card-title class="payment-method">Agregar método de pago</mat-card-title>
 
+                                <mat-card-content>
+                                    <div>
+                                        <mat-form-field>
+                                            <mat-label>Número de tarjeta</mat-label>
+                                            <input matInput formControlName="thirdCtrl" placeholder="Ex. -4654" required>
+                                        </mat-form-field>
+                                    </div>
 
+                                    <div>
+                                        <mat-form-field>
+                                            <mat-label>Número de propietario</mat-label>
+                                            <input matInput formControlName="thirdCtrl" placeholder="Ex. Jose Vasquez" required>
+                                        </mat-form-field>
+                                    </div>
 
-                            <form [formGroup]="thirdFormGroup" class="flex flex-column">
+                                    <div class="flex">
 
-                                <div>
-                                    <p class="font-bold">Agregar método de pago</p>
+                                        <mat-form-field class="mr-2">
+                                            <mat-label>Vencimiento</mat-label>
+                                            <input matInput formControlName="thirdCtrl" placeholder="Ex. 02/2024" required>
+                                        </mat-form-field>
+
+                                        <mat-form-field>
+                                            <mat-label>CVC</mat-label>
+                                            <input matInput formControlName="thirdCtrl" placeholder="ej. 123" required>
+                                        </mat-form-field>
+                                    </div>
+                                </mat-card-content>
+
                                 </div>
-                                <div>
-                                    <mat-form-field>
-                                        <mat-label>Número de tarjeta</mat-label>
-                                        <input matInput formControlName="thirdCtrl" placeholder="Ex. -4654" required>
-                                    </mat-form-field>
-                                </div>
+                            </mat-card>
 
-                                <div>
-                                    <mat-form-field>
-                                        <mat-label>Número de propietario</mat-label>
-                                        <input matInput formControlName="thirdCtrl" placeholder="Ex. Jose Vasquez" required>
-                                    </mat-form-field>
-                                </div>
-
-                                <div class="flex">
-
-                                    <mat-form-field>
-                                        <mat-label>Vencimiento</mat-label>
-                                        <input matInput formControlName="thirdCtrl" placeholder="Ex. 02/2024" required>
-                                    </mat-form-field>
-
-                                    <mat-form-field>
-                                        <mat-label>CVC</mat-label>
-                                        <input matInput formControlName="thirdCtrl" placeholder="ej. 123" required>
-                                    </mat-form-field>
-
-                                </div>
-
-                                <div>
-                                <button mat-button matStepperPrevious>Back</button>
-                                <button mat-button matStepperNext>Next</button>
-                                </div>
-                            </form>
-                        </div>
+                            <div class="flex mt-5 justify-content-between" >
+                                <button mat-button matStepperPrevious class="back-button">Volver</button>
+                                <button mat-raised-button color="primary" matStepperNext>Pagar</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
 
             </mat-step>
 
-            <mat-step>
-            <ng-template matStepLabel>Done</ng-template>
-            <p>You are now done.</p>
-            <div>
-                <button mat-button matStepperPrevious>Back</button>
-            </div>
-            </mat-step>
 
 
     </mat-stepper>

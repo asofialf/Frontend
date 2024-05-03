@@ -19,15 +19,25 @@ export const routes: Routes = [
         {
           path: 'itinerary',
           title: 'Itinerary Detail',
-          loadComponent: () => import('./context/planification/interface/pages/itinerary/itinerary-detail/itinerary-detail.component').then(m=>m.default),
-          children: [
+          loadComponent: () => import('./context/planification/interface/pages/itinerary/itinerary-detail/itinerary-detail.component'),
+        /*   children: [
             {
               path: 'create-new-itinerary',
               title: 'Create new itinerary ',
-              loadComponent: () => import('./context/planification/interface/pages/itinerary/create-new-itinerary/create-new-itinerary.component').then(m=>m.default)
+              loadComponent: () => import('./context/planification/interface/pages/itinerary/create-new-itinerary/create-new-itinerary.component')
             },
-          ]
+          ], */
         },
+        {
+          path: 'create-new-itinerary',
+          title: 'Create new itinerary ',
+          loadComponent: () => import('./context/planification/interface/pages/itinerary/create-new-itinerary/create-new-itinerary.component').then(m=>m.default)
+        },
+        {
+          path: 'edit-itinerary',
+          title: 'Edit itinerary ',
+          loadComponent: () => import('./context/planification/interface/pages/itinerary/edit-itinerary/edit-itinerary.component').then(m=>m.default)
+        }
 
       ]
   },
