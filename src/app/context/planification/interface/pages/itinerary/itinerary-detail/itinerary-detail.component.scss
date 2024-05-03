@@ -1,0 +1,23 @@
+h1{
+    color: var(--color-primary)
+}
+
+.itinerary-container{
+    margin: 0px 50px 50px 50px;
+}
+
+p{
+    color: var(--color-text);
+    margin : 0px 0px 0px 0px;
+}
+
+th {
+    color: var(--color-primary)
+}
+.Stops th {
+    background: var(--color-primary);
+}
+
+.mat-body p, .mat-body-2 p, .mat-typography .mat-body p, .mat-typography .mat-body-2 p, .mat-typography p {
+    margin: 0 0 0px !important;
+}

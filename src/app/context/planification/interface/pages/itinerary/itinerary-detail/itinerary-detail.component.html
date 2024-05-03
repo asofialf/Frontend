@@ -1,0 +1,63 @@
+<div class="itinerary-container">
+    <div class="flex flex-column">
+        <div class="flex align-items-center justify-content-start h-4rem font-bold border-round m-2">
+            <h1>My Itinerary</h1>
+        </div>
+        <section *ngIf="!ShowSection">
+            <div class="flex align-items-center justify-content-end h-4rem font-bold border-round m-2">
+                <button mat-raised-button color="primary" (click)="goToCreateItinerary()">Añadir itinerario</button>
+            </div>
+        </section>
+        <section *ngIf="!ShowSection">
+            <div class="grid">
+                <div class="col">
+                    <div class="p-3">
+                        <mat-card>
+                            <mat-card-content>
+                                <img src="../../../../../../../assets/images/planification/itinerary/stops.png" class="w-full" alt="Personal">
+                            </mat-card-content>
+                        </mat-card>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="p-3">
+                        <div class="flex mb-5 justify-content-end">
+                            <button mat-raised-button color="primary" (click)="goToEditItinerary()">
+                                <mat-icon>edit</mat-icon> Edit Itinerary
+                            </button>
+                        </div>
+
+                        <div class="mb-5">
+                            <h1 class="font-bold" color="primary">Chino SAC</h1>
+                        </div>
+
+                        <div class="flex align-items-stretch flex-wrap mb-5">
+                            <div class="flex align-items-center justify-content-center">
+                                <mat-icon color="primary">location_on</mat-icon>
+                            </div>
+                            <div class="flex align-items-center justify-content-center nro-stops">
+                                <p> Total number of stops: 60</p>
+                            </div>
+                        </div>
+
+                        <div>
+
+                            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        
+                                <ng-container matColumnDef="Stops">
+                                    <th mat-header-cell *matHeaderCellDef> Stops </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                                </ng-container>
+                                
+                                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                            </table>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
