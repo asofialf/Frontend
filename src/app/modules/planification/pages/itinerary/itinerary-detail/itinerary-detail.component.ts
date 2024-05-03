@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-itinerary-detail',
@@ -12,12 +13,16 @@ import { MatButtonModule } from '@angular/material/button';
 })
 export default class ItineraryDetailComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     console.log('ItineraryDetailComponent initialized');
   }
 
+  goToCreateItinerary() {
+    this.router.navigate(['create-new-itinerary'], { relativeTo: this.route });
+
+  }
 
 
 }

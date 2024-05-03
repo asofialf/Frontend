@@ -19,13 +19,16 @@ export const routes: Routes = [
         {
           path: 'itinerary',
           title: 'Itinerary Detail',
-          loadComponent: () => import('./modules/planification/pages/itinerary/itinerary-detail/itinerary-detail.component').then(m=>m.default)
+          loadComponent: () => import('./modules/planification/pages/itinerary/itinerary-detail/itinerary-detail.component').then(m=>m.default),
+          children: [
+            {
+              path: 'create-new-itinerary',
+              title: 'Create new itinerary ',
+              loadComponent: () => import('./modules/planification/pages/itinerary/create-new-itinerary/create-new-itinerary.component').then(m=>m.default)
+            },
+          ]
         },
-        {
-          path: 'create-new-itinerary',
-          title: 'Create new itinerary ',
-          loadComponent: () => import('./modules/planification/pages/itinerary/create-new-itinerary/create-new-itinerary.component')
-        },
+
       ]
   },
 ];

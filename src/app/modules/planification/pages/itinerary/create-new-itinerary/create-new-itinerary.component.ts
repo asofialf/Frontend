@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 
 import {FormBuilder, Validators, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BreakpointObserver} from '@angular/cdk/layout';
@@ -50,7 +50,7 @@ const ELEMENT_DATA: Stop[] = [
   templateUrl: './create-new-itinerary.component.html',
   styleUrl: './create-new-itinerary.component.scss'
 })
-export default class CreateNewItineraryComponent implements AfterViewInit  {
+export default class CreateNewItineraryComponent implements AfterViewInit, OnInit  {
 
   displayedColumns: string[] = ['Alias', 'Distrito', 'Latitud', 'Longitud', 'Acciones'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
@@ -75,6 +75,9 @@ export default class CreateNewItineraryComponent implements AfterViewInit  {
     this.stepperOrientation = breakpointObserver
       .observe('(min-width: 800px)')
       .pipe(map(({matches}) => (matches ? 'horizontal' : 'vertical')));
+  }
+  ngOnInit(): void {
+    console.log('CreateNewItineraryComponent initialized');
   }
   
 
