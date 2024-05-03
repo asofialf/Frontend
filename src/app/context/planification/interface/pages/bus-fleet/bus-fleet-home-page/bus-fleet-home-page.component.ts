@@ -29,6 +29,11 @@ export class BusFleetHomePageComponent {
   }
 
   navigateToBusFleet(): void {
-    this.router.navigate(['/bus-fleet/buses']); // Cambia según la ruta deseada
+    this.router.navigate(['/bus-fleet/buses']);
   }
+
+  navigateToDriverFleet(): void {
+    this.router.navigate(['/bus-fleet/drivers']);
+  }
+
 }
