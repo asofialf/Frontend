@@ -4,6 +4,7 @@ import {RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import {MatListModule} from '@angular/material/list';
 import { MatIcon } from '@angular/material/icon';
+import {HttpClientModule} from "@angular/common/http";
 
 @Component({
   selector: 'app-main-layout',
@@ -11,6 +12,7 @@ import { MatIcon } from '@angular/material/icon';
   imports: [
     RouterOutlet,
     MatSidenavModule,
+    HttpClientModule,
     MatListModule,
     MatIcon,
     RouterLink,
