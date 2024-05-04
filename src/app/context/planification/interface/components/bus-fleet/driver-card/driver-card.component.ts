@@ -1,4 +1,5 @@
 import {Component, Input} from '@angular/core';
+import {Driver} from "../../../../domain/models/driver";
 
 @Component({
   selector: 'app-driver-card',
@@ -9,12 +10,7 @@ import {Component, Input} from '@angular/core';
 })
 export class DriverCardComponent {
   @Input()
-  public driver: {
-    name: string,
-    license: number,
-    busAsociated: string;
-    imageUrl:string
-  } | undefined;
+  public driver: Driver | undefined;
 
 }
 

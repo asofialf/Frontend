@@ -11,6 +11,7 @@ import {DriversService} from "../../../../application/service/drivers.service";
 import {Driver} from "../../../../domain/models/driver";
 import {HttpClientModule} from "@angular/common/http";
 import {NgForOf} from "@angular/common";
+import {DriverCardComponent} from "../../../components/bus-fleet/driver-card/driver-card.component";
 
 
 @Component({
@@ -22,7 +23,8 @@ import {NgForOf} from "@angular/common";
     MatButton,
     HttpClientModule,
     UserProfileCardComponent,
-    NgForOf
+    NgForOf,
+    DriverCardComponent
   ],
   templateUrl: './driver-administration.component.html',
   styleUrl: './driver-administration.component.scss'

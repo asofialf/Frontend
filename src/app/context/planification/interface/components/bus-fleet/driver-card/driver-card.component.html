@@ -1,8 +1,10 @@
-<div class="user-profile w-9">
-  <img src="{{ driver?.imageUrl }}" alt="User Image" class="user-image">
+<div class="user-profile w-10 gap-2">
+  <img
+    [src]="driver?.image_url || 'assets/images/planification/bus_flote/bus_driver_logo.png'"
+    alt="User Image"
+    class="user-image w-2rem h-2rem md:w-4rem md:h-4rem lg:w-9rem lg:h-9rem">
   <div class="user-info">
-    <h3>Conductor: {{ driver?.name }}</h3>
-    <p>N° Licencia: {{ driver?.license}}</p>
-    <p>Bus: {{driver?.busAsociated}}</p>
+    <h3>Driver: <span class="font-normal">{{ driver?.first_name }}</span></h3>
+    <p>License N°: {{ driver?.driver_license_number }}</p>
   </div>
 </div>

@@ -1,0 +1,29 @@
+
+.user-profile {
+  display: flex;
+  align-items: center;
+  background: #FFF;
+  border-radius: 20px;
+  padding: 10px;
+  border: 1px solid var(--color-primary);
+}
+
+
+h3{
+  color: black;
+  font-weight: bold;
+}
+p{
+  color: black;
+}
+
+
+.user-image {
+  border-radius: 10%;
+  margin-right: 10px;
+}
+
+.user-info h3, .user-info p {
+  margin: 0;
+}
+

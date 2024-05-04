@@ -1,17 +1,18 @@
 <div class="p-8">
 
   <div class="header-section flex justify-content-between align-items-center">
-    <h1>Buses</h1>
+    <h1>Driver List</h1>
     <app-user-profile-card [user]="currentUser"></app-user-profile-card>
   </div>
 
-  <button mat-flat-button color="primary" class="big-button">Añadir Conductor</button>
+  <button mat-flat-button color="primary" class="big-button">Add New Driver</button>
 
-  <h1>Drivers List</h1>
-  <ul>
-    <li *ngFor="let driver of drivers">
-      <p>{{ driver.first_name }} {{ driver.last_name }} - License: {{ driver.driver_license_number }}</p>
-    </li>
-  </ul>
+  <div class="mt-4 grid">
+
+    <div class="col-12 lg:col-6" *ngFor="let driver of drivers">
+      <app-driver-card class="" [driver]="driver"></app-driver-card>
+    </div>
+
+  </div>
 
 </div>
