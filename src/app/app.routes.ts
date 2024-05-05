@@ -26,8 +26,19 @@ export const routes: Routes = [
             },
             {
               path:'drivers',
-              title:'Drivers',
-              loadComponent:()=> import("./context/planification/interface/pages/bus-fleet/driver-administration/driver-administration.component").then(m=>m.DriverAdministrationComponent)
+              children:[
+                {
+                  path:'',
+                  title:'Drivers',
+                  loadComponent:()=> import("./context/planification/interface/pages/bus-fleet/driver-administration/driver-administration.component").then(m=>m.DriverAdministrationComponent)
+                },
+                {
+                  path:'add-new-driver',
+                  title:'Add New Driver',
+                  loadComponent:()=> import("./context/planification/interface/pages/bus-fleet/driver-register/driver-register.component").then(m=>m.DriverRegisterComponent)
+                }
+
+              ]
             }
           ]
         },

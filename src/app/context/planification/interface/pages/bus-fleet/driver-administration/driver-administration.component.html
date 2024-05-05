@@ -5,7 +5,12 @@
     <app-user-profile-card [user]="currentUser"></app-user-profile-card>
   </div>
 
-  <button mat-flat-button color="primary w-full lg:w-3" class="big-button">Add New Driver</button>
+  <button
+    mat-flat-button color="primary w-full lg:w-3"
+    class="big-button"
+    (click)="navigateToAddNewDriver()"
+  >
+    Add New Driver</button>
 
   <div class="drivers-container">
 

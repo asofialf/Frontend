@@ -4,7 +4,7 @@ import {MatTableModule} from "@angular/material/table";
 import {UserProfileCardComponent} from "../../../../../shared/components/user-profile-card/user-profile-card.component";
 import {UserProfileCardInformation} from "../../../../../account/domain/models/userProfileCardInformation";
 import {AccountService} from "../../../../../account/application/service/account.service";
-import {RouterOutlet} from "@angular/router";
+import {Router, RouterOutlet} from "@angular/router";
 import {DriversService} from "../../../../application/service/drivers.service";
 import {Driver} from "../../../../domain/models/driver";
 import {HttpClientModule} from "@angular/common/http";
@@ -40,7 +40,7 @@ export class DriverAdministrationComponent implements OnInit{
 
   currentUser:UserProfileCardInformation;
 
-  constructor(private accountService:AccountService, private driversService:DriversService) {
+  constructor(private router:Router,private accountService:AccountService, private driversService:DriversService) {
     this.currentUser= this.accountService.getCurrentUser()
   }
 
@@ -66,5 +66,9 @@ export class DriverAdministrationComponent implements OnInit{
 
   updatePaginatedDrivers(startIndex: number): void {
     this.paginatedDrivers = this.drivers.slice(startIndex, startIndex + this.pageSize);
+  }
+
+  navigateToAddNewDriver(): void {
+    this.router.navigate(['/bus-fleet/drivers/add-new-driver']);
   }
 }
