@@ -10,3 +10,22 @@ p{
   padding: 22px 24px; /* Aumenta el padding para hacer el botón más grande */
   font-size: 1rem; /* Aumenta la fuente */
 }
+
+.drivers-container {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1; /* Permite que el contenedor crezca y llene el espacio disponible */
+  justify-content: space-between;
+  min-height: 500px;
+}
+
+.grid-edit {
+  flex: 1; /* Asegura que el grid tome el espacio disponible */
+}
+
+.mat-paginator-edit {
+  position: absolute;
+  bottom: 0;
+  width: 80%;
+  padding: 20px 0; /* Agrega un padding para que no esté demasiado pegado a las tarjetas */
+}

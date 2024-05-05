@@ -1,18 +1,37 @@
-<div class="p-8">
+<div class="p-8 flex flex-column min-h-screen justify-content-between">
 
   <div class="header-section flex justify-content-between align-items-center">
     <h1>Driver List</h1>
     <app-user-profile-card [user]="currentUser"></app-user-profile-card>
   </div>
 
-  <button mat-flat-button color="primary" class="big-button">Add New Driver</button>
+  <button mat-flat-button color="primary w-full lg:w-3" class="big-button">Add New Driver</button>
 
-  <div class="mt-4 grid">
+  <div class="drivers-container">
 
-    <div class="col-12 lg:col-6" *ngFor="let driver of drivers">
-      <app-driver-card class="" [driver]="driver"></app-driver-card>
+    <div *ngIf="paginatedDrivers.length>0; else loading">
+
+      <div class="mt-4 grid grid-edit">
+        <div class="col-12 lg:col-6" *ngFor="let driver of paginatedDrivers">
+          <app-driver-card [driver]="driver"></app-driver-card>
+        </div>
+      </div>
+
+      <mat-paginator class="mat-paginator-edit"
+                     [length]="drivers.length"
+                     [pageSize]="6"
+                     [pageSizeOptions]="[6]"
+                     (page)="handlePageEvent($event)">
+      </mat-paginator>
+
     </div>
 
+
   </div>
+
+
+  <ng-template #loading>
+    <p>Loading drivers...</p>
+  </ng-template>
 
 </div>
