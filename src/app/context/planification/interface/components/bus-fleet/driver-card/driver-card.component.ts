@@ -11,6 +11,11 @@ import {Driver} from "../../../../domain/models/driver";
 export class DriverCardComponent {
   @Input()
   public driver: Driver | undefined;
+  defaultImage: string = 'assets/images/planification/bus_flote/bus_driver_logo.png';
+
+  handleImageError(event: Event): void {
+    (event.target as HTMLImageElement).src = this.defaultImage;
+  }
 
 }
 

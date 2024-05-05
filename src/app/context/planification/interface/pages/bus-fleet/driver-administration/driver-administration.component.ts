@@ -32,6 +32,8 @@ import {MatPaginatorModule, PageEvent} from "@angular/material/paginator";
 })
 export class DriverAdministrationComponent implements OnInit{
 
+  defaultImage=''
+
   drivers: Driver[] = [];
   paginatedDrivers:Driver[]=[];
   pageSize=6;
