@@ -51,4 +51,16 @@ export class DriverRegisterComponent {
     return <boolean>control?.invalid && (control?.touched || this.isSubmitted);
   }
 
+  resetForm() {
+    this.registerForm.reset({
+      photo: '',
+      complete_name: '',
+      dni: '',
+      license_number: '',
+      license_photo: ''
+    });
+    this.isSubmitted = false; // Resetear también el indicador de envío
+  }
+
+
 }
