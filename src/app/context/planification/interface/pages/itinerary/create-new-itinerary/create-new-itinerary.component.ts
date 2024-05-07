@@ -9,14 +9,14 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {AsyncPipe} from '@angular/common';
-import { MatIcon } from '@angular/material/icon';
+import { MatIcon } from '@angular/material/icon'; 
 import {MatCardModule} from '@angular/material/card';
 import {MatSort, Sort, MatSortModule} from '@angular/material/sort';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import {LiveAnnouncer} from '@angular/cdk/a11y';
 import {MatPaginatorModule} from '@angular/material/paginator';
 
-import { Stop } from '../../../stop.dto';
+import { Stop } from '../../../../domain/models/stop.dto';
 import {SubscriptionPlanComponent} from "./components/subscription-plan/subscription-plan.component";
 import { PaymentDetailComponent } from './components/payment-detail/payment-detail.component';
 

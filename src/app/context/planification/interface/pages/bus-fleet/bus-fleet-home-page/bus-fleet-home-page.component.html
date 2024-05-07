@@ -1,8 +1,7 @@
 <div class="p-8">
 
   <div class="header-section flex justify-content-between align-items-center">
-    <h1>Mi Flota</h1>
-    <app-user-profile-card [user]="currentUser"></app-user-profile-card>
+    <h1>Mi Fleet</h1>
   </div>
 
   <div class="pt-5 h-full">
@@ -18,7 +17,7 @@
                   <img src="../../../../../../../assets/images/planification/bus_flote/Personal.png" class="w-full" alt="Personal">
                   <div class="flex-column">
                     <h1>Personal</h1>
-                    <button mat-flat-button color="primary" class="big-button">Administrar</button>
+                    <button mat-flat-button color="primary" class="big-button" (click)="navigateToDriverFleet()">Administrar</button>
                   </div>
                 </div>
               </mat-card>
@@ -29,7 +28,7 @@
                   <img src="../../../../../../../assets/images/planification/bus_flote/Buses.png" class="w-full" alt="Buses">
                   <div>
                     <h1>Buses</h1>
-                    <button mat-flat-button color="primary" class="big-button">Administrar</button>
+                    <button mat-flat-button color="primary"  class="big-button" (click)="navigateToBusFleet()">Administrar</button>
                   </div>
                 </div>
               </mat-card>
@@ -65,3 +64,5 @@
 
 
 </div>
+
+<router-outlet></router-outlet>

@@ -14,3 +14,4 @@ export class UserProfileCardComponent {
     email: string,
     imageUrl: string } | undefined;
 }
+
