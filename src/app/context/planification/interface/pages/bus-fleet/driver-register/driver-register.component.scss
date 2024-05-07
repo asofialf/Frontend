@@ -5,3 +5,12 @@ h1{
 p{
   color: var(--color-primary)
 }
+
+.label{
+  color: var(--color-primary)
+}
+
+.error {
+  color: red;
+  font-size: 0.8rem;
+}

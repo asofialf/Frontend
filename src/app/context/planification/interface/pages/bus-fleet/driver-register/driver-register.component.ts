@@ -7,26 +7,40 @@ import {UserProfileCardComponent} from "../../../../../shared/components/user-pr
 import {UserProfileCardInformation} from "../../../../../account/domain/models/userProfileCardInformation";
 import {AccountService} from "../../../../../account/application/service/account.service";
 import {DriversService} from "../../../../application/service/drivers.service";
+import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-driver-register',
   standalone: true,
-    imports: [
-        DriverCardComponent,
-        MatButton,
-        MatPaginator,
-        NgForOf,
-        NgIf,
-        UserProfileCardComponent
-    ],
+  imports: [
+    DriverCardComponent,
+    MatButton,
+    MatPaginator,
+    NgForOf,
+    NgIf,
+    UserProfileCardComponent,
+    ReactiveFormsModule
+  ],
   templateUrl: './driver-register.component.html',
   styleUrl: './driver-register.component.scss'
 })
 export class DriverRegisterComponent {
-  currentUser:UserProfileCardInformation;
+  currentUser: UserProfileCardInformation;
+  registerForm: FormGroup;
 
-  constructor(private accountService:AccountService) {
-    this.currentUser= this.accountService.getCurrentUser()
+  constructor(private fb: FormBuilder, private accountService: AccountService) {
+    this.currentUser = this.accountService.getCurrentUser();
+    this.registerForm = this.fb.group({
+      photo: ['', Validators.required],
+      complete_name: ['', Validators.required],
+      dni: ['', Validators.required],
+      license_number: ['', Validators.required],
+      license_photo: ['', Validators.required]
+    });
+  }
+
+  onSubmit() {
+    console.log('Submitted form', this.registerForm.value, this.registerForm.invalid);
   }
 
 }
