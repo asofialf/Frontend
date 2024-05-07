@@ -5,49 +5,34 @@
   </div>
 
   <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-    <!-- Campo de foto del conductor -->
     <div class="field">
       <label class="label">Photo</label>
       <input type="file" class="input" formControlName="photo">
-      <div *ngIf="registerForm.get('photo')?.touched && registerForm.get('photo')?.invalid">
-        <p class="error">Photo is required</p>
-      </div>
+      <span *ngIf="shouldShowError('photo')" class="error">Photo is required</span>
     </div>
 
-    <!-- Campo de nombre completo -->
     <div class="field">
       <label class="label">Complete Name</label>
       <input type="text" class="input" formControlName="complete_name">
-      <div *ngIf="registerForm.get('complete_name')?.touched && registerForm.get('complete_name')?.invalid">
-        <p class="error">Complete name is required</p>
-      </div>
+      <span *ngIf="shouldShowError('complete_name')" class="error">Complete name is required</span>
     </div>
 
-    <!-- Campo de DNI -->
     <div class="field">
       <label class="label">DNI</label>
       <input type="text" class="input" formControlName="dni">
-      <div *ngIf="registerForm.get('dni')?.touched && registerForm.get('dni')?.invalid">
-        <p class="error">DNI is required</p>
-      </div>
+      <span *ngIf="shouldShowError('dni')" class="error">DNI is required</span>
     </div>
 
-    <!-- Campo de número de licencia -->
     <div class="field">
       <label class="label">License Number</label>
       <input type="text" class="input" formControlName="license_number">
-      <div *ngIf="registerForm.get('license_number')?.touched && registerForm.get('license_number')?.invalid">
-        <p class="error">License number is required</p>
-      </div>
+      <span *ngIf="shouldShowError('license_number')" class="error">License number is required</span>
     </div>
 
-    <!-- Campo de foto de licencia -->
     <div class="field">
       <label class="label">License Photo</label>
       <input type="file" class="input" formControlName="license_photo">
-      <div *ngIf="registerForm.get('license_photo')?.touched && registerForm.get('license_photo')?.invalid">
-        <p class="error">License photo is required</p>
-      </div>
+      <span *ngIf="shouldShowError('license_photo')" class="error">License photo is required</span>
     </div>
 
     <div>

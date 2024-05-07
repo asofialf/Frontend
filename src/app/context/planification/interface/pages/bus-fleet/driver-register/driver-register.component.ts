@@ -27,6 +27,7 @@ import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} fr
 export class DriverRegisterComponent {
   currentUser: UserProfileCardInformation;
   registerForm: FormGroup;
+  isSubmitted=false;
 
   constructor(private fb: FormBuilder, private accountService: AccountService) {
     this.currentUser = this.accountService.getCurrentUser();
@@ -41,6 +42,13 @@ export class DriverRegisterComponent {
 
   onSubmit() {
     console.log('Submitted form', this.registerForm.value, this.registerForm.invalid);
+    this.isSubmitted=true;
+    console.log(this.isSubmitted);
+  }
+
+  shouldShowError(controlName: string): boolean {
+    const control = this.registerForm.get(controlName);
+    return <boolean>control?.invalid && (control?.touched || this.isSubmitted);
   }
 
 }
