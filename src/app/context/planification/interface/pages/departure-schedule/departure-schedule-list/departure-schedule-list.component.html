@@ -14,13 +14,13 @@
     </tr>
     </thead>
     <tbody>
-    <ng-container *ngFor="let schedule of departureSchedules; let i = index">
+    <ng-container *ngFor="let schedule of departureScheduleDisplays; let i = index">
       <tr [ngClass]="{ 'secondary-row': i % 2 === 0 }">
         <td>{{ schedule.bus_unit_id }}</td>
         <td>{{ schedule.driver }}</td>
         <td>{{ schedule.bus }}</td>
-        <td>{{ schedule.date }}</td>
-        <td>{{ schedule.departures[0] }}</td>
+        <td>{{ schedule.departure_date }}</td>
+        <td>{{ schedule.shift_start }}</td>
       </tr>
     </ng-container>
     </tbody>

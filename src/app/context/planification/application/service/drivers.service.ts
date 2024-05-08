@@ -15,4 +15,8 @@ export class DriversService{
   getAllDrivers(): Observable<Driver[]> {
     return this.http.get<Driver[]>(this.apiUrl);
   }
+
+  getDriverById(id: number): Observable<Driver> {
+    return this.http.get<Driver>(`${this.apiUrl}/${id}`);
+  }
 }

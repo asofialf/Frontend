@@ -53,6 +53,18 @@ export const routes: Routes = [
           title: 'Edit itinerary ',
           loadComponent: () => import('./context/planification/interface/pages/itinerary/edit-itinerary/edit-itinerary.component').then(m=>m.default)
         }
+        ,  {
+          path: 'departure-schedule',
+          title: 'Departure Schedule',
+          loadComponent: () => import('./context/planification/interface/pages/departure-schedule/departure-schedule-list/departure-schedule-list.component').then(m=>m.DepartureScheduleListComponent),
+          children: [
+            {
+              path: 'create-new-departure-schedule',
+              title: 'Create new departure schedule',
+              loadComponent: () => import('./context/planification/interface/pages/departure-schedule/create-new-departure-schedule/create-new-departure-schedule.component').then(m=>m.CreateNewDepartureScheduleComponent)
+            },
+          ]
+        }
 
       ]
   },

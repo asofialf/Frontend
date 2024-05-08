@@ -10,9 +10,28 @@ import {
   MatDatepickerToggle,
 } from '@angular/material/datepicker';
 import { provideNativeDateAdapter } from '@angular/material/core';
+import {HttpClientModule} from "@angular/common/http";
+import {NgForOf} from "@angular/common";
 import { MatInputModule } from '@angular/material/input';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DepartureScheduleService } from '../../../../application/service/departure-schedule.service';
+import { map } from 'rxjs/operators';
+import { DepartureSchedule } from '../../../../domain/models/departure_schedule';
+import { DepartureService } from '../../../../application/service/departure.service';
+import { Departure } from '../../../../domain/models/departure';
+import { DepartureScheduleDisplay } from '../../../../domain/models/departure_schedule_display';
+import { DriversService} from "../../../../application/service/drivers.service";
+import {Driver} from "../../../../domain/models/driver";
+import { BusUnitService } from '../../../../application/service/bus-unit.service';
+import { BusUnit } from '../../../../domain/models/bus_unit';
+
+import { Bus } from '../../../../domain/models/bus';
+
+import {combineLatest, of} from "rxjs";
+
+const BUS_TEMPLATE: Bus[] = [
+  {id: 1, license_plate:'239-CSA', bus_model_id: 1},
+  {id: 2,license_plate:'249-CSA', bus_model_id: 2},
+];
 
 @Component({
   selector: 'app-departure-schedule-list',
@@ -25,34 +44,71 @@ import { DepartureScheduleService } from '../../../../application/service/depart
     MatDatepickerToggle,
     MatDatepickerModule,
     MatInputModule,
+    HttpClientModule,
+    NgForOf
   ],
   templateUrl: './departure-schedule-list.component.html',
   styleUrl: './departure-schedule-list.component.scss',
   providers: [provideNativeDateAdapter()],
 })
 export class DepartureScheduleListComponent implements OnInit {
-  departureSchedules: any[] = [
-    {
-      bus_unit_id: 'BUS001',
-      driver: 'John Doe',
-      bus: 'Bus A',
-      date: '2024-05-07',
-      departures: ['09:00 AM', '12:00 PM', '03:00 PM']
-    },
-    {
-      bus_unit_id: 'BUS002',
-      driver: 'Jane Smith',
-      bus: 'Bus B',
-      date: '2024-05-08',
-      departures: ['08:30 AM', '11:30 AM', '02:30 PM']
-    },
-    // Add more sample data as needed
-  ];
 
-  constructor(private router: Router, private route: ActivatedRoute) {}
+  departureScheduleDisplays: DepartureScheduleDisplay[] = [];
+
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private departureService: DepartureService,
+    private driversService: DriversService,
+    // private busService: BusService,
+    private busUnitService: BusUnitService
+  ) {}
 
   ngOnInit() {
-    // You can fetch data for departureSchedules from your service here if needed
+    this.loadDepartureScheduleDisplays();
+  }
+  getBusByID(busId: number): Bus | undefined {
+    return BUS_TEMPLATE.find(bus => bus.id === busId);
+  }
+
+  loadDepartureScheduleDisplays(): void {
+    const departureSchedules$ = this.departureService.getDepartureSchedules();
+    const busUnits$ = this.busUnitService.getBusUnits();
+    const drivers$ = this.driversService.getAllDrivers();
+    const buses$ = of(BUS_TEMPLATE);
+    let departuresByScheduleId: { [key: number]: Departure[] } = {};
+
+    combineLatest([departureSchedules$, busUnits$, drivers$, buses$])
+      .pipe(
+        map(([departureSchedules, busUnits, drivers, buses]) => {
+          return departureSchedules.map(schedule => {
+            const busUnit = busUnits.find(unit => unit.id === schedule.bus_unit_id);
+            const driver = drivers.find(driver => driver.id === busUnit?.drivers_id);
+            const bus = this.getBusByID(busUnit?.buses_id || 0);
+            const departures$ = this.departureService.getDepartures(schedule.id);
+
+            departures$.subscribe(departures => {
+              departuresByScheduleId[schedule.id] = departures;
+            });
+
+            return {
+              id: schedule.id,
+              departure_date: schedule.departure_date,
+              bus_unit_id: schedule.bus_unit_id,
+              shift_start: schedule.shift_start,
+              driver: driver ? `${driver.first_name} ${driver.last_name}` : 'Unknown',
+              bus: bus ? bus.license_plate : 'Unknown',
+              departures: [],
+              //
+
+            };
+          });
+        })
+      )
+      .subscribe({
+        next: data => (this.departureScheduleDisplays = data),
+        error: err => console.log(err),
+      });
   }
 
   goToCreateNewDepartureSchedule() {
@@ -61,4 +117,3 @@ export class DepartureScheduleListComponent implements OnInit {
     });
   }
 }
-
