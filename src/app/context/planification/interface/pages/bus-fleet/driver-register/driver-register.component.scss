@@ -21,6 +21,20 @@ p{
   margin-top: 0.25rem;
 }
 
+.back-button{
+  padding: 8px 16px;
+  border: none;
+  background-color: var(--color-primary);
+  color: white;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+  &:hover {
+    background-color: darken(#556BDA, 10%);
+  }
+}
+
 .big-button {
   border-radius: 15px;
   border: 2px solid var(--color-primary);
