@@ -17,7 +17,9 @@
           <label class="label col-12 mb-2 md:col-2 md:mb-0">1. Driver Photo</label>
           <div class="col-12 md:col-10">
             <input type="file" class="input input-file w-full" formControlName="photo">
-            <span *ngIf="shouldShowError('photo')" class="error">Photo is required</span>
+            <!--
+               <span *ngIf="shouldShowError('photo')" class="error">Photo is required</span>
+            -->
           </div>
         </div>
 
@@ -49,7 +51,9 @@
           <label class="label col-12 mb-2 md:col-2 md:mb-0">5. License Photo</label>
           <div class="col-12 md:col-10">
             <input type="file" class="input input-file w-full" formControlName="license_photo">
-            <span *ngIf="shouldShowError('license_photo')" class="error">License photo is required</span>
+            <!--
+              <span *ngIf="shouldShowError('license_photo')" class="error">License photo is required</span>
+            -->
           </div>
 
         </div>

@@ -33,15 +33,17 @@ export class DriverRegisterComponent {
   constructor(
     private location:Location,
     private fb: FormBuilder,
-    private accountService: AccountService)
+    private accountService: AccountService,
+    private driversService:DriversService
+    )
   {
     this.currentUser = this.accountService.getCurrentUser();
     this.registerForm = this.fb.group({
-      photo: ['', Validators.required],
+      photo: [''],
       complete_name: ['', Validators.required],
       dni: ['', Validators.required],
       license_number: ['', Validators.required],
-      license_photo: ['', Validators.required]
+      license_photo: ['']
     });
   }
 
@@ -50,9 +52,19 @@ export class DriverRegisterComponent {
   }
 
   onSubmit() {
-    console.log('Submitted form', this.registerForm.value, this.registerForm.invalid);
-    this.isSubmitted=true;
-    console.log(this.isSubmitted);
+    console.log('Submitted form', this.registerForm.value);
+    if (!this.registerForm.invalid) {
+      this.driversService.addDriver(this.registerForm.value).subscribe({
+        next: (response) => {
+          console.log('Driver added', response);
+          this.goBack(); // Opcional: regresar tras añadir
+        },
+        error: (error) => {
+          console.error('Error adding driver', error);
+        }
+      });
+    }
+    this.isSubmitted = true;
   }
 
   shouldShowError(controlName: string): boolean {
