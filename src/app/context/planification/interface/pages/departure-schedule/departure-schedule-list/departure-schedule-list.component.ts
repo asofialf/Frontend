@@ -27,6 +27,7 @@ import { BusUnit } from '../../../../domain/models/bus_unit';
 import { Bus } from '../../../../domain/models/bus';
 
 import {combineLatest, of} from "rxjs";
+import {DepartureScheduleDetailComponent} from "../departure-schedule-detail/departure-schedule-detail.component";
 
 const BUS_TEMPLATE: Bus[] = [
   {id: 1, license_plate:'239-CSA', bus_model_id: 1},
@@ -45,15 +46,27 @@ const BUS_TEMPLATE: Bus[] = [
     MatDatepickerModule,
     MatInputModule,
     HttpClientModule,
-    NgForOf
+    NgForOf,
   ],
   templateUrl: './departure-schedule-list.component.html',
   styleUrl: './departure-schedule-list.component.scss',
   providers: [provideNativeDateAdapter()],
 })
 export class DepartureScheduleListComponent implements OnInit {
+  openedAccordion: DepartureScheduleDisplay | null = null;
 
+  toggleAccordion(schedule: DepartureScheduleDisplay) {
+    const departures$ = this.departureService.getDepartures(schedule.id);
+
+    departures$.subscribe(departures => {
+      console.log('Departures for schedule', schedule.id, ':', departures);
+      schedule.departures = departures;
+      this.openedAccordion = this.openedAccordion === schedule ? null : schedule;
+      console.log('Opened Accordion:', this.openedAccordion);
+    });
+  }
   departureScheduleDisplays: DepartureScheduleDisplay[] = [];
+  dialog?: MatDialog;
 
   constructor(
     private router: Router,
@@ -61,12 +74,16 @@ export class DepartureScheduleListComponent implements OnInit {
     private departureService: DepartureService,
     private driversService: DriversService,
     // private busService: BusService,
-    private busUnitService: BusUnitService
-  ) {}
+    private busUnitService: BusUnitService,
+    matDialog: MatDialog // Rename the parameter
+  ) {
+    this.dialog = matDialog;
+  }
 
   ngOnInit() {
     this.loadDepartureScheduleDisplays();
   }
+
   getBusByID(busId: number): Bus | undefined {
     return BUS_TEMPLATE.find(bus => bus.id === busId);
   }
@@ -85,11 +102,13 @@ export class DepartureScheduleListComponent implements OnInit {
             const busUnit = busUnits.find(unit => unit.id === schedule.bus_unit_id);
             const driver = drivers.find(driver => driver.id === busUnit?.drivers_id);
             const bus = this.getBusByID(busUnit?.buses_id || 0);
-            const departures$ = this.departureService.getDepartures(schedule.id);
+            // const departures$ = this.departureService.getDepartures(schedule.id);
 
-            departures$.subscribe(departures => {
-              departuresByScheduleId[schedule.id] = departures;
-            });
+            // departures$.subscribe(departures => {
+            //   console.log('Departures for schedule', schedule.id, ':', departures);
+            //   departuresByScheduleId[schedule.id] = departures;
+            //   console.log(departuresByScheduleId);
+            // });
 
             return {
               id: schedule.id,
@@ -99,8 +118,6 @@ export class DepartureScheduleListComponent implements OnInit {
               driver: driver ? `${driver.first_name} ${driver.last_name}` : 'Unknown',
               bus: bus ? bus.license_plate : 'Unknown',
               departures: [],
-              //
-
             };
           });
         })
@@ -111,7 +128,25 @@ export class DepartureScheduleListComponent implements OnInit {
       });
   }
 
-  goToCreateNewDepartureSchedule() {
+  openDepartureDetails(schedule: DepartureScheduleDisplay) {
+    if (this.dialog) {
+      const dialogRef = this.dialog.open(DepartureScheduleDetailComponent, {
+        data: {departures: schedule.departures},
+      });
+
+      dialogRef.componentInstance.deleteDeparture.subscribe((departureId: number) => {
+        const departureToDelete = (schedule.departures as Departure[]).find(
+          (departure: Departure) => departure.id === departureId
+        );
+
+        if (departureToDelete) {
+          const departureIndex = schedule.departures.indexOf(departureToDelete);
+          schedule.departures.splice(departureIndex, 1);
+        }
+      });
+    }
+  }
+  goToCreateNewDepartureSchedule(){
     this.router.navigate(['create-new-departure-schedule'], {
       relativeTo: this.route,
     });

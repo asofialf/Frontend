@@ -1,3 +1,5 @@
+import {Departure} from "./departure";
+
 export interface DepartureScheduleDisplay {
   id: number;
   departure_date: string;
@@ -5,5 +7,5 @@ export interface DepartureScheduleDisplay {
   shift_start: string;
   driver: string;
   bus: string;
-  departures: string[];
+  departures: Departure[];
 }
