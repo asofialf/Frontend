@@ -147,8 +147,12 @@ export class DepartureScheduleListComponent implements OnInit {
     }
   }
   goToCreateNewDepartureSchedule(){
-    this.router.navigate(['create-new-departure-schedule'], {
-      relativeTo: this.route,
-    });
+    this.router.navigate(['create-new-departure-schedule']
+      //   , {
+      //   //go to the create-new-departure-schedule page
+      //
+      //   relativeTo: this.route,
+      // }).then(r => console.log('Navigation result:', r));
+    ) .then(r => console.log('Navigation result:', r));
   }
 }

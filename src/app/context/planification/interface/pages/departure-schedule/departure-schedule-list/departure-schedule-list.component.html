@@ -11,6 +11,7 @@
       <th>Bus</th>
       <th>Date</th>
       <th>Shift start</th>
+      <th>Actions</th>
     </tr>
     </thead>
     <tbody>
@@ -21,30 +22,29 @@
         <td>{{ schedule.bus }}</td>
         <td>{{ schedule.departure_date }}</td>
         <td>{{ schedule.shift_start }}</td>
+        <td class="action-buttons">
+          <button class="edit-button">
+            <i class="fa fa-pencil"></i> Edit
+          </button>
+          <button class="delete-button">
+            <i class="fa fa-trash"></i> Delete
+          </button>
+        </td>
       </tr>
       <tr *ngIf="openedAccordion === schedule">
-        <td colspan="5">
+        <td colspan="6">
           <div class="accordion-content">
             <table>
               <thead>
               <tr>
                 <th>Round Number</th>
                 <th>Departure Time</th>
-                <th>Actions</th>
               </tr>
               </thead>
               <tbody>
               <tr *ngFor="let departure of schedule.departures; let j = index">
                 <td>{{ departure.round_number }}</td>
                 <td>{{ departure.departure_time }}</td>
-                <td class="action-buttons">
-                  <button class="edit-button">
-                    <i class="fa fa-pencil"></i> Edit
-                  </button>
-                  <button class="delete-button">
-                    <i class="fa fa-trash"></i> Delete
-                  </button>
-                </td>
               </tr>
               </tbody>
             </table>

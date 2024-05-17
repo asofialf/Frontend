@@ -1,0 +1,64 @@
+$primary-color: #556BDA;
+$secondary-color: #97A1D7;
+$edit-button-color: #2F80ED;
+$delete-button-color: #990000;
+
+.departure-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  font-family: Urbanist, "Helvetica Neue", sans-serif;
+
+  h1 {
+    color: var(--color-primary);
+    text-align: left;
+    margin-left: 20px;
+    font-family: inherit;
+  }
+
+  button {
+    background-color: var(--color-primary);
+    color: white;
+    border-radius: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    align-self: flex-end;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    max-width: 200px;
+    font-family: inherit;
+
+    &:hover {
+      background-color: darken($primary-color, 10%);
+    }
+  }
+
+  table {
+    width: 80%;
+    border-collapse: collapse;
+    margin: 0 auto;
+    border: none;
+
+    th, td {
+      padding: 10px;
+      text-align: left;
+    }
+
+    th {
+      background-color: var(--color-primary);
+      color: white;
+      font-weight: lighter;
+      text-transform: uppercase;
+    }
+
+    tr:nth-child(even) {
+      background-color: var(--color-secondary);
+    }
+
+    tr:nth-child(odd) {
+      background-color: white;
+    }
+  }
+}
