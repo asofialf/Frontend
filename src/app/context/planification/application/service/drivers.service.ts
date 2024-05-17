@@ -15,4 +15,10 @@ export class DriversService{
   getAllDrivers(): Observable<Driver[]> {
     return this.http.get<Driver[]>(this.apiUrl);
   }
+
+  addDriver(driverData: any): Observable<Driver> {
+    return this.http.post<Driver>(this.apiUrl,driverData);
+  }
+
+
 }

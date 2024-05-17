@@ -1,17 +1,42 @@
-<div class="p-8">
+<div class="p-8 flex flex-column min-h-screen justify-content-between">
 
   <div class="header-section flex justify-content-between align-items-center">
-    <h1>Buses</h1>
+    <h1>Driver List</h1>
     <app-user-profile-card [user]="currentUser"></app-user-profile-card>
   </div>
 
-  <button mat-flat-button color="primary" class="big-button">Añadir Conductor</button>
+  <button
+    mat-flat-button color="primary w-full lg:w-3"
+    class="big-button"
+    (click)="navigateToAddNewDriver()"
+  >
+    Add New Driver</button>
 
-  <h1>Drivers List</h1>
-  <ul>
-    <li *ngFor="let driver of drivers">
-      <p>{{ driver.first_name }} {{ driver.last_name }} - License: {{ driver.driver_license_number }}</p>
-    </li>
-  </ul>
+  <div class="drivers-container">
+
+    <div *ngIf="paginatedDrivers.length>0; else loading">
+
+      <div class="mt-4 grid grid-edit">
+        <div class="col-12 lg:col-6" *ngFor="let driver of paginatedDrivers">
+          <app-driver-card [driver]="driver"></app-driver-card>
+        </div>
+      </div>
+
+      <mat-paginator class="mat-paginator-edit absolute xl:fixed"
+                     [length]="drivers.length"
+                     [pageSize]="6"
+                     [pageSizeOptions]="[6]"
+                     (page)="handlePageEvent($event)">
+      </mat-paginator>
+
+    </div>
+
+
+  </div>
+
+
+  <ng-template #loading>
+    <p>Loading drivers...</p>
+  </ng-template>
 
 </div>
