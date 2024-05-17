@@ -7,6 +7,7 @@ import {AccountService} from "../../../../../account/application/service/account
 import {UserProfileCardInformation} from "../../../../../account/domain/models/userProfileCardInformation";
 
 export interface Bus {
+  id: number;
   licensePlate: string;
   model: string;
   year: number;
@@ -15,13 +16,13 @@ export interface Bus {
 }
 
 const BUS_DATA: Bus[] = [
-  {licensePlate:'239-CSA',model: 'V5-2', year: 2021, seatCapacity: 30, totalCapacity: 50},
-  {licensePlate:'239-CSA',model: 'V5-2', year: 2022, seatCapacity: 32, totalCapacity: 50},
-  {licensePlate:'239-CSA',model: 'V5-2', year: 2023, seatCapacity: 34, totalCapacity: 50},
-  {licensePlate:'239-CSA',model: 'V5-2', year: 2024, seatCapacity: 35, totalCapacity: 50},
-  {licensePlate:'239-CSA',model: 'V5-2', year: 2022, seatCapacity: 28, totalCapacity: 50},
-  {licensePlate:'239-CSA',model: 'V5-2', year: 2019, seatCapacity: 26, totalCapacity: 50},
-  {licensePlate:'239-CSA',model: 'V5-2', year: 2018, seatCapacity: 30, totalCapacity: 50},
+  {id: 1, licensePlate:'239-CSA',model: 'V5-2', year: 2021, seatCapacity: 30, totalCapacity: 50},
+  {id: 2,licensePlate:'239-CSA',model: 'V5-2', year: 2022, seatCapacity: 32, totalCapacity: 50},
+  {id: 3,licensePlate:'239-CSA',model: 'V5-2', year: 2023, seatCapacity: 34, totalCapacity: 50},
+  {id: 4,licensePlate:'239-CSA',model: 'V5-2', year: 2024, seatCapacity: 35, totalCapacity: 50},
+  {id: 5,licensePlate:'239-CSA',model: 'V5-2', year: 2022, seatCapacity: 28, totalCapacity: 50},
+  {id: 6,licensePlate:'239-CSA',model: 'V5-2', year: 2019, seatCapacity: 26, totalCapacity: 50},
+  {id: 7,licensePlate:'239-CSA',model: 'V5-2', year: 2018, seatCapacity: 30, totalCapacity: 50},
 ];
 
 @Component({

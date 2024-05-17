@@ -1,0 +1,20 @@
+<div class="departure-details-container">
+  <h2>Departures</h2>
+  <table>
+    <thead>
+    <tr>
+      <th>Round number</th>
+      <th>Departure time</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let departure of departures">
+      <td>{{ departure.round_number }}</td>
+      <td>{{ departure.departure_time }}</td>
+      <td>
+        <button (click)="deleteDeparture.emit(departure.id)">Delete</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

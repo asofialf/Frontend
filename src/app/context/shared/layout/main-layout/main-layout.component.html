@@ -15,7 +15,7 @@
 
         <mat-nav-list>
             <a mat-list-item routerLink="/home" routerLinkActive="active">Dashboard</a>
-            <a mat-list-item routerLink="/about" routerLinkActive="active">Departure schedule</a>
+            <a mat-list-item routerLink="/departure-schedule" routerLinkActive="active">Departure schedule</a>
             <a mat-list-item routerLink="/bus-fleet" routerLinkActive="active">Mi fleet</a>
             <a mat-list-item routerLink="/itinerary" routerLinkActive="active">Mi itinerary</a>
             <a mat-list-item routerLink="/contact" routerLinkActive="active">Notifications</a>
@@ -27,7 +27,7 @@
         <div class="flex justify-content-end">
             <app-user-profile-card [user]="currentUser"></app-user-profile-card>
         </div>
-        
+
        <router-outlet></router-outlet>
     </mat-drawer-content>
 </mat-drawer-container>
