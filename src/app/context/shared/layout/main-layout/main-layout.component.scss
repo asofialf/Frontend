@@ -1,26 +1,30 @@
-* {
-    color: white;
+$active-background-color: white;
+$text-color: white;
+
+.mat-drawer {
+    width: 250px;
+    height: 100%;
+    background: var(--color-primary);
 }
 
-.mdc-list-item__primary-text {
-    color: white;
-}
 .menu-container {
     width: auto;
     height: 100%;
 }
 
-mat-drawer{
-    width: 250px;
-    height: 100%;
-    background: var(--color-primary)
+* {
+    color: $text-color;
 }
 
 .active-link {
-    color: red; /* Solo para propósitos de prueba */
-}
+    color: var(--color-primary) !important;
+    background: $active-background-color !important;
 
+    mat-icon{
+        color: var(--color-primary) !important;
+    }
 
-.mdc-list-item__primary-text {
-    color: white;
+    span{
+        color: var(--color-primary) !important;
+    }
 }
