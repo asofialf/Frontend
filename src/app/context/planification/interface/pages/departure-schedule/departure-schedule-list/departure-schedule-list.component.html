@@ -3,55 +3,8 @@
   <button (click)="goToCreateNewDepartureSchedule()">
     Create new departure schedule
   </button>
-  <table>
-    <thead>
-    <tr>
-      <th>Unit bus</th>
-      <th>Driver</th>
-      <th>Bus</th>
-      <th>Date</th>
-      <th>Shift start</th>
-      <th>Actions</th>
-    </tr>
-    </thead>
-    <tbody>
-    <ng-container *ngFor="let schedule of departureScheduleDisplays; let i = index">
-      <tr (click)="toggleAccordion(schedule)" class="departure-record">
-        <td>{{ schedule.bus_unit_id }}</td>
-        <td>{{ schedule.driver }}</td>
-        <td>{{ schedule.bus }}</td>
-        <td>{{ schedule.departure_date }}</td>
-        <td>{{ schedule.shift_start }}</td>
-        <td class="action-buttons">
-          <button class="edit-button">
-            <i class="fa fa-pencil"></i> Edit
-          </button>
-          <button class="delete-button">
-            <i class="fa fa-trash"></i> Delete
-          </button>
-        </td>
-      </tr>
-      <tr *ngIf="openedAccordion === schedule">
-        <td colspan="6">
-          <div class="accordion-content">
-            <table>
-              <thead>
-              <tr>
-                <th>Round Number</th>
-                <th>Departure Time</th>
-              </tr>
-              </thead>
-              <tbody>
-              <tr *ngFor="let departure of schedule.departures; let j = index">
-                <td>{{ departure.round_number }}</td>
-                <td>{{ departure.departure_time }}</td>
-              </tr>
-              </tbody>
-            </table>
-          </div>
-        </td>
-      </tr>
-    </ng-container>
-    </tbody>
-  </table>
+  <!-- Aqui va la tabla de los schedule -->
+  <app-departure-schedule-table
+    [enableEditing]="true"
+  ></app-departure-schedule-table>
 </div>

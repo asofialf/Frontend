@@ -1,0 +1,68 @@
+<div class="departure-table-container">
+  <table>
+    <thead>
+      <tr>
+        <th>Unit bus</th>
+        <th>Driver</th>
+        <th>Bus</th>
+        <th>Date</th>
+        <th>Shift start</th>
+        <th *ngIf="enableEditing">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let schedule of departureScheduleDisplays">
+        <tr (click)="toggleAccordion(schedule)" class="departure-record">
+          <td>{{ schedule.bus_unit_id }}</td>
+          <td>{{ schedule.driver }}</td>
+          <td>{{ schedule.bus }}</td>
+          <td>{{ schedule.departure_date }}</td>
+          <td>{{ schedule.shift_start }}</td>
+          <td class="action-buttons" *ngIf="enableEditing">
+            <button class="edit-button" (click)="editSchedule(schedule)">
+              Edit
+              <mat-icon
+                aria-hidden="false"
+                aria-label="trash button"
+                fontIcon="edit"
+              >
+              </mat-icon>
+            </button>
+            <button
+              class="delete-button"
+              (click)="deleteSchedule(schedule.id, $event)"
+            >
+              Delete
+              <mat-icon
+                aria-hidden="false"
+                aria-label="trash button"
+                fontIcon="delete"
+              >
+              </mat-icon>
+            </button>
+          </td>
+        </tr>
+        <tr *ngIf="openedAccordion === schedule">
+          <td colspan="6">
+            <div class="accordion-content">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Round Number</th>
+                    <th>Departure Time</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let departure of schedule.departures">
+                    <td>{{ departure.round_number }}</td>
+                    <td>{{ departure.departure_time }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+</div>

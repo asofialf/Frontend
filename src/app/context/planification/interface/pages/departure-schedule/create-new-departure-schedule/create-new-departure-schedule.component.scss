@@ -1,6 +1,6 @@
-$primary-color: #556BDA;
-$secondary-color: #97A1D7;
-$edit-button-color: #2F80ED;
+$primary-color: #556bda;
+$secondary-color: #97a1d7;
+$edit-button-color: #2f80ed;
 $delete-button-color: #990000;
 
 .departure-container {
@@ -41,7 +41,8 @@ $delete-button-color: #990000;
     margin: 0 auto;
     border: none;
 
-    th, td {
+    th,
+    td {
       padding: 10px;
       text-align: left;
     }
