@@ -33,6 +33,7 @@ const BUS_TEMPLATE: Bus[] = [
 })
 export class DepartureScheduleTableComponent implements OnInit {
   @Input() enableEditing: boolean = false;
+  @Input() enableDateInfo: boolean = false;
   departureScheduleDisplays: DepartureScheduleDisplay[] = [];
   openedAccordion: DepartureScheduleDisplay | null = null;
 

@@ -1,10 +1,14 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import {DatePipe} from "@angular/common";
-import {MatFormField} from "@angular/material/form-field";
-import {MatIcon} from "@angular/material/icon";
-import {FormsModule} from "@angular/forms";
-import {CommonModule} from "@angular/common";
+import { DatePipe } from '@angular/common';
+import { MatFormField } from '@angular/material/form-field';
+import { MatIcon } from '@angular/material/icon';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-departure-time-dialog',
@@ -14,10 +18,14 @@ import {CommonModule} from "@angular/common";
     MatFormField,
     MatIcon,
     FormsModule,
-    CommonModule
+    CommonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatIconModule,
+    MatDialogModule,
   ],
   templateUrl: './departure-time-dialog.component.html',
-  styleUrl: './departure-time-dialog.component.scss'
+  styleUrls: ['./departure-time-dialog.component.scss'],
 })
 export class DepartureTimeDialogComponent implements OnInit {
   departureTimes: string[] = [];
@@ -26,7 +34,7 @@ export class DepartureTimeDialogComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<DepartureTimeDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.initializeDepartureTimes();
@@ -37,8 +45,9 @@ export class DepartureTimeDialogComponent implements OnInit {
       this.departureTimes.push('');
     }
   }
+
   hasEmptyDepartureTimes(): boolean {
-    return this.departureTimes.some(time => !time);
+    return this.departureTimes.some((time) => !time);
   }
 
   onCancel() {
@@ -47,7 +56,6 @@ export class DepartureTimeDialogComponent implements OnInit {
 
   onAddToTable() {
     // Logic to add the departure schedule to the table
-
-    this.dialogRef.close();
+    this.dialogRef.close({ departureTimes: this.departureTimes });
   }
 }
