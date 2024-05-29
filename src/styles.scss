@@ -13,6 +13,9 @@ body {
     overflow: hidden; 
 }
 
+h1 {
+    font-size: 5em;
+}
 
 $custom-basic-palette:(
     //#97A1D7
@@ -155,7 +158,7 @@ $custom-typography: mat.define-typography-config(
 $custom-basic: mat.define-palette($custom-basic-palette);
 $custom-primary: mat.define-palette($custom-primary-palette);
 $custom-accent: mat.define-palette($custom-secondary-palette);
-$custom-warn: mat.define-palette($custom-warn-palette);
+
 
 
 $custom-theme: mat.define-light-theme((
@@ -163,7 +166,6 @@ $custom-theme: mat.define-light-theme((
         basic: $custom-basic,
         primary: $custom-primary,
         accent: $custom-accent,
-        warn: $custom-warn,
     ),
     typography: $custom-typography,
 ));
@@ -175,7 +177,6 @@ $custom-theme: mat.define-light-theme((
     --color-primary: #{mat.get-color-from-palette($custom-primary, 500)};
     --color-secondary: #{mat.get-color-from-palette($custom-basic, 100)};
     --color-tertiary: #{mat.get-color-from-palette($custom-accent, 500)};
-    --color-warn: #{mat.get-color-from-palette($custom-warn, 500)};
     --color-info: #2F80ED;
     --color-success: #27AE60;
     --color-error: #990000;

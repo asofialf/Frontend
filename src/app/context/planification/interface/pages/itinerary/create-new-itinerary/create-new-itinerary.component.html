@@ -6,12 +6,15 @@
       <div>Make your screen larger to see a horizontal stepper</div>
     }
   }
-
+ 
 
 <div class="itinerary-container">
     <div class="flex flex-column">
         <div class="flex align-items-center justify-content-start h-4rem font-bold border-round m-2">
-            <h1>Mi itinerario</h1>
+            <button mat-icon-button color="primary" (click)="goBack()">
+                <mat-icon>arrow_back_ios</mat-icon>
+            </button>
+            <h1 class="font-bold ml-2 mb-0">Mi itinerario</h1>
         </div>
     </div>
     <mat-stepper

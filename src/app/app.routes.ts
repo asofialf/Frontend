@@ -8,7 +8,7 @@ export const routes: Routes = [
         {
           path:'home',
           title:'Home',
-          loadComponent: ()=>import('./context/planification/interface/pages/bus-fleet/bus-fleet-home-page/bus-fleet-home-page.component').then(m=>m.BusFleetHomePageComponent)
+          loadComponent: ()=>import('./context/monitoring/interface/pages/dashboard/dashboard.component').then(m=>m.DashboardComponent)
         }
         ,
         {

@@ -1,6 +1,6 @@
 <div class="itinerary-container">
     <div class="flex flex-column">
-        <div class="flex align-items-center justify-content-start h-4rem font-bold border-round m-2">
+        <div class="flex align-items-center justify-content-start font-bold border-round">
             <h1>My Itinerary</h1>
         </div>
         <section *ngIf="!ShowSection">
@@ -10,7 +10,7 @@
         </section>
         <section *ngIf="!ShowSection">
             <div class="grid">
-                <div class="col">
+                <div class="col-6">
                     <div class="p-3">
                         <mat-card>
                             <mat-card-content>
@@ -19,7 +19,7 @@
                         </mat-card>
                     </div>
                 </div>
-                <div class="col">
+                <div class="col-6">
                     <div class="p-3">
                         <div class="flex mb-5 justify-content-end">
                             <button mat-raised-button color="primary" (click)="goToEditItinerary()">

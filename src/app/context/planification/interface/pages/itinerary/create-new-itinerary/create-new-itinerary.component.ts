@@ -15,6 +15,7 @@ import {MatSort, Sort, MatSortModule} from '@angular/material/sort';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import {LiveAnnouncer} from '@angular/cdk/a11y';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import { Location } from '@angular/common';
 
 import { Stop } from '../../../../domain/models/stop.dto';
 import {SubscriptionPlanComponent} from "./components/subscription-plan/subscription-plan.component";
@@ -69,8 +70,8 @@ export default class CreateNewItineraryComponent implements AfterViewInit  {
   constructor(
     private _formBuilder: FormBuilder,
     breakpointObserver: BreakpointObserver,
-    private _liveAnnouncer: LiveAnnouncer
-
+    private _liveAnnouncer: LiveAnnouncer,
+    private location: Location
   ) {
     this.stepperOrientation = breakpointObserver
       .observe('(min-width: 800px)')
@@ -82,5 +83,8 @@ export default class CreateNewItineraryComponent implements AfterViewInit  {
 
   }
 
+  goBack(): void {
+    this.location.back();
+  }
 
 }
