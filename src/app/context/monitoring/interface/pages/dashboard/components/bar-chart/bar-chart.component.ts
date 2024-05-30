@@ -4,10 +4,10 @@ import { NgApexchartsModule } from 'ng-apexcharts';
 import {
   ApexAxisChartSeries,
   ApexChart,
-  ChartComponent,
   ApexDataLabels,
   ApexXAxis,
-  ApexPlotOptions
+  ApexPlotOptions,
+  ApexFill
 } from "ng-apexcharts";
 
 export type ChartOptions = {
@@ -16,6 +16,7 @@ export type ChartOptions = {
   dataLabels: ApexDataLabels;
   plotOptions: ApexPlotOptions;
   xaxis: ApexXAxis;
+  colors: string[];
 };
 
 @Component({
@@ -52,7 +53,8 @@ export class BarChartComponent implements OnInit {
       xaxis: {
         categories: [],
         labels: {}
-      }
+      },
+      colors: ['#FF0000']
     };
   }
 
@@ -82,7 +84,8 @@ export class BarChartComponent implements OnInit {
             hour: 'HH:mm'
           }
         }
-      }
+      },
+      colors: ['#FF0000']
     };
   }
 }

@@ -1,5 +1,7 @@
 h1{
-  color: var(--color-primary)
+  color: var(--color-primary);
+  font-family: 'Urbanist', sans-serif;
+  font-weight: bold;
 }
 
 p{
@@ -8,7 +10,7 @@ p{
 
 .big-button {
   padding: 22px 24px; /* Aumenta el padding para hacer el botón más grande */
-  font-size: 1rem; /* Aumenta la fuente */
+   /* Aumenta la fuente */
 }
 
 .drivers-container {

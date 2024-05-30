@@ -1,1 +1,12 @@
-<p>label-bar-chart works!</p>
+<div id="chart" class="mt-2">
+    <apx-chart
+      [series]="chartOptions.series"
+      [chart]="chartOptions.chart"
+      [dataLabels]="chartOptions.dataLabels"
+      [stroke]="chartOptions.stroke"
+      [colors]="chartOptions.colors"
+      [plotOptions]="chartOptions.plotOptions"
+      [yaxis]="chartOptions.yaxis"
+      [xaxis]="chartOptions.xaxis"
+    ></apx-chart>
+  </div>

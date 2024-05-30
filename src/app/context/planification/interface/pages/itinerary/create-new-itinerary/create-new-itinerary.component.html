@@ -7,10 +7,9 @@
     }
   }
  
-
 <div class="itinerary-container">
     <div class="flex flex-column">
-        <div class="flex align-items-center justify-content-start h-4rem font-bold border-round m-2">
+        <div class="flex align-items-center justify-content-start font-bold border-round ">
             <button mat-icon-button color="primary" (click)="goBack()">
                 <mat-icon>arrow_back_ios</mat-icon>
             </button>
@@ -21,7 +20,6 @@
         labelPosition="bottom"
         class="itinerary-register-stepper"
         [orientation]="(stepperOrientation | async)!">
-
 
             <mat-step [stepControl]="firstFormGroup" label="Datos Generales">
 

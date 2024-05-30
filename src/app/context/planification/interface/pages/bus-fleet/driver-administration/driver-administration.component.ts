@@ -11,7 +11,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {NgForOf, NgIf} from "@angular/common";
 import {DriverCardComponent} from "../../../components/bus-fleet/driver-card/driver-card.component";
 import {MatPaginatorModule, PageEvent} from "@angular/material/paginator";
-
+import {MatDividerModule} from '@angular/material/divider';
 
 @Component({
   selector: 'app-driver-administration',
@@ -25,7 +25,8 @@ import {MatPaginatorModule, PageEvent} from "@angular/material/paginator";
     NgForOf,
     DriverCardComponent,
     MatPaginatorModule,
-    NgIf
+    NgIf,
+    MatDividerModule
   ],
   templateUrl: './driver-administration.component.html',
   styleUrl: './driver-administration.component.scss'
