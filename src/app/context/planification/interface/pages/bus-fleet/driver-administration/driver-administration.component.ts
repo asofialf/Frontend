@@ -8,10 +8,12 @@ import {Router, RouterOutlet} from "@angular/router";
 import {DriversService} from "../../../../application/service/drivers.service";
 import {Driver} from "../../../../domain/models/driver";
 import {HttpClientModule} from "@angular/common/http";
-import {NgForOf, NgIf} from "@angular/common";
+import {NgForOf, NgIf, Location} from "@angular/common";
 import {DriverCardComponent} from "../../../components/bus-fleet/driver-card/driver-card.component";
 import {MatPaginatorModule, PageEvent} from "@angular/material/paginator";
 import {MatDividerModule} from '@angular/material/divider';
+import { MatIcon } from '@angular/material/icon'; 
+import {MatButtonModule} from '@angular/material/button'; 
 
 @Component({
   selector: 'app-driver-administration',
@@ -26,7 +28,9 @@ import {MatDividerModule} from '@angular/material/divider';
     DriverCardComponent,
     MatPaginatorModule,
     NgIf,
-    MatDividerModule
+    MatDividerModule,
+    MatIcon,
+    MatButtonModule
   ],
   templateUrl: './driver-administration.component.html',
   styleUrl: './driver-administration.component.scss'
@@ -41,7 +45,12 @@ export class DriverAdministrationComponent implements OnInit{
 
   currentUser:UserProfileCardInformation;
 
-  constructor(private router:Router,private accountService:AccountService, private driversService:DriversService) {
+  constructor(
+    private router:Router,
+    private accountService:AccountService, 
+    private driversService:DriversService,
+    private location: Location
+  ) {
     this.currentUser= this.accountService.getCurrentUser()
   }
 
@@ -72,4 +81,9 @@ export class DriverAdministrationComponent implements OnInit{
   navigateToAddNewDriver(): void {
     this.router.navigate(['/bus-fleet/drivers/add-new-driver']);
   }
+
+  goBack(): void {
+    this.location.back();
+  }
+
 }

@@ -30,18 +30,38 @@ export const routes: Routes = [
                 {
                   path:'',
                   title:'Drivers',
-                  loadComponent:()=> import("./context/planification/interface/pages/bus-fleet/driver-administration/driver-administration.component").then(m=>m.DriverAdministrationComponent)
+                  loadComponent:()=> import("./context/planification/interface/pages/bus-fleet/driver-administration/driver-administration.component").then(m=>m.DriverAdministrationComponent),
+                  children:[
+                    {
+                      path:':id/heartbeat-analytics',
+                      title:'Driver Details',
+                      loadComponent:()=> import("./context/monitoring/interface/pages/hearbeat/heartbeat-analytics.component").then(m=>m.HeartbeatAnalyticsComponent)
+                    }
+                  ]
                 },
                 {
                   path:'add-new-driver',
                   title:'Add New Driver',
                   loadComponent:()=> import("./context/planification/interface/pages/bus-fleet/driver-register/driver-register.component").then(m=>m.DriverRegisterComponent)
-                }
+                },
+
+
 
               ]
             }
           ]
         },
+
+
+
+        {
+          path:':id/heartbeat-analytics',
+          title:'Driver Details',
+          loadComponent:()=> import("./context/monitoring/interface/pages/hearbeat/heartbeat-analytics.component").then(m=>m.HeartbeatAnalyticsComponent)
+        },
+
+
+        
         {
           path: 'itinerary',
           title: 'Itinerary Detail',
