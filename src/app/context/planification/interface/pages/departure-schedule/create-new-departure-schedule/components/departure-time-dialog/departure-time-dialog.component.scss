@@ -41,6 +41,7 @@ $delete-button-color: #990000;
     }
     .time-selector {
       display: flex;
+      max-width: fit-content;
       align-items: center;
 
       mat-form-field {
@@ -66,7 +67,7 @@ $delete-button-color: #990000;
     }
 
     table {
-      width: 100%;
+      width: 80%;
       margin-top: 10px;
       border-spacing: 0 10px;
 

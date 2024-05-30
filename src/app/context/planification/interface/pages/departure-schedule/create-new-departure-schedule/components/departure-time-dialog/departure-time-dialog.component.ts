@@ -37,7 +37,7 @@ export class DepartureTimeDialogComponent implements OnInit {
   is24HourFormat: boolean = true;
 
   departureTimes: string[] = [];
-  time: string = '';
+  canAddToTable: boolean = false;
 
   constructor(
     public dialogRef: MatDialogRef<DepartureTimeDialogComponent>,
@@ -49,76 +49,34 @@ export class DepartureTimeDialogComponent implements OnInit {
   }
 
   initializeDepartureTimes() {
-    const now = new Date();
-    const selectedDate = new Date(this.data.date);
-
-    // Verificar si la fecha seleccionada es diferente a la fecha actual
-    if (
-      selectedDate.getFullYear() === now.getFullYear() &&
-      selectedDate.getMonth() === now.getMonth() &&
-      selectedDate.getDate() === now.getDate()
-    ) {
-      // La fecha seleccionada es la misma que la fecha actual, devolver un error o mostrar un mensaje
-      console.error(
-        'La fecha seleccionada no puede ser la misma que la fecha actual.'
-      );
-      return;
-    }
-
     for (let i = 0; i < this.data.numberOfLaps; i++) {
       this.departureTimes.push('');
-      this.hours.push(selectedDate.getHours());
-      this.minutes.push(selectedDate.getMinutes());
+      this.hours.push(0);
+      this.minutes.push(0);
     }
+    this.updateCanAddToTable();
   }
 
   toggleTimeFormat() {
     this.is24HourFormat = !this.is24HourFormat;
+    this.updateCanAddToTable();
   }
 
   hasEmptyDepartureTimes(): boolean {
-    let previousDepartureTime: Date | null = null;
-
-    for (let i = 0; i < this.departureTimes.length; i++) {
-      const departureTime = this.getDepartureTime(i);
-
-      if (!departureTime) {
-        return true; // Empty departure time
-      }
-
-      if (previousDepartureTime && departureTime <= previousDepartureTime) {
-        return true; // Departure time is not after the previous one
-      }
-
-      previousDepartureTime = departureTime;
-    }
-
-    return false;
+    return this.departureTimes.some((time) => time === '');
   }
 
   getDepartureTime(index: number): Date | null {
     const hour = this.hours[index];
     const minute = this.minutes[index];
-    const now = new Date();
 
     if (hour === null || minute === null) {
       return null;
     }
 
-    const amPm = this.is24HourFormat ? undefined : hour >= 12 ? 'PM' : 'AM';
-    const formattedHour = this.is24HourFormat ? hour : hour % 12 || 12;
-    const formattedMinute = minute.toString().padStart(2, '0');
-    const timeString = `${formattedHour}:${formattedMinute} ${amPm}`;
-    const departureTime = new Date(`1970-01-01T${timeString}`);
-    // Verificar si la hora seleccionada es anterior a la hora actual
-    if (departureTime < now) {
-      // La hora seleccionada es anterior a la hora actual, devolver un error o mostrar un mensaje
-      console.error(
-        'La hora seleccionada no puede ser anterior a la hora actual.'
-      );
-      return null;
-    }
-    return new Date(`1970-01-01T${timeString}`);
+    let date = new Date();
+    date.setHours(hour, minute, 0, 0);
+    return date;
   }
 
   formatHour(hour: number): string {
@@ -140,13 +98,71 @@ export class DepartureTimeDialogComponent implements OnInit {
   }
 
   onAddToTable() {
-    const departureTimes = this.hours.map((hour, index) => {
-      const minute = this.minutes[index];
-      const amPm = this.is24HourFormat ? undefined : hour >= 12 ? 'PM' : 'AM';
-      const formattedHour = this.is24HourFormat ? hour : hour % 12 || 12;
-      const formattedMinute = minute.toString().padStart(2, '0');
-      return `${formattedHour}:${formattedMinute} ${amPm}`;
-    });
-    this.dialogRef.close({ departureTimes: this.departureTimes });
+    if (this.canAddToTable) {
+      const departureTimes = this.hours.map((hour, index) => {
+        const minute = this.minutes[index];
+        const formattedHour = this.is24HourFormat ? hour : hour % 12 || 12;
+        const formattedMinute = minute.toString().padStart(2, '0');
+        const amPm = this.is24HourFormat ? '' : hour >= 12 ? ' PM' : ' AM';
+        return `${formattedHour}:${formattedMinute}${amPm}`;
+      });
+      this.dialogRef.close({ departureTimes });
+    }
+  }
+
+  updateCanAddToTable() {
+    const now = new Date();
+    const selectedDate = new Date(this.data.date);
+    const isSameDay =
+      selectedDate.getFullYear() === now.getFullYear() &&
+      selectedDate.getMonth() === now.getMonth() &&
+      selectedDate.getDate() === now.getDate();
+
+    let previousDepartureTime: Date | null = null;
+    for (let i = 0; i < this.departureTimes.length; i++) {
+      const departureTime = this.getDepartureTime(i);
+      if (!departureTime) {
+        this.canAddToTable = false;
+        return;
+      }
+
+      if (isSameDay && i === 0) {
+        const twoMinutesDiff = 120000; // Two minutes in milliseconds
+        if (departureTime.getTime() - now.getTime() < twoMinutesDiff) {
+          this.canAddToTable = false;
+          return;
+        }
+      }
+
+      if (previousDepartureTime && departureTime <= previousDepartureTime) {
+        this.canAddToTable = false;
+        return;
+      }
+
+      if (previousDepartureTime && i > 0) {
+        const oneHourDiff = 3600000; // One hour in milliseconds
+        if (
+          departureTime.getTime() - previousDepartureTime.getTime() <
+          oneHourDiff
+        ) {
+          this.canAddToTable = false;
+          return;
+        }
+      }
+
+      previousDepartureTime = departureTime;
+    }
+
+    this.canAddToTable = true;
+  }
+
+  onHourChange(index: number, hour: number) {
+    this.hours[index] = hour;
+    this.updateCanAddToTable();
+  }
+
+  onMinuteChange(index: number, minute: number) {
+    this.minutes[index] = minute;
+    this.updateCanAddToTable();
   }
 }
