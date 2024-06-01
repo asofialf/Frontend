@@ -8,8 +8,10 @@ import {UserProfileCardInformation} from "../../../../../account/domain/models/u
 import {AccountService} from "../../../../../account/application/service/account.service";
 import {DriversService} from "../../../../application/service/drivers.service";
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
-import {Router} from "@angular/router";
 
+import { BackButtonComponent } from '../../../../../shared/components/back-button/back-button.component';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
 @Component({
   selector: 'app-driver-register',
   standalone: true,
@@ -20,7 +22,10 @@ import {Router} from "@angular/router";
     NgForOf,
     NgIf,
     UserProfileCardComponent,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BackButtonComponent,
+    MatFormFieldModule,
+    MatInputModule
   ],
   templateUrl: './driver-register.component.html',
   styleUrl: './driver-register.component.scss'
@@ -35,13 +40,16 @@ export class DriverRegisterComponent {
     private fb: FormBuilder,
     private accountService: AccountService,
     private driversService:DriversService
-    )
+  )
   {
     this.currentUser = this.accountService.getCurrentUser();
     this.registerForm = this.fb.group({
       photo: [''],
-      complete_name: ['', Validators.required],
+      first_name: ['', Validators.required],
+      last_name: ['', Validators.required],
       dni: ['', Validators.required],
+      phone_number: ['', Validators.required, Validators.pattern('^[0-9]*$')],
+      email: ['', Validators.required, Validators.email],
       license_number: ['', Validators.required],
       license_photo: ['']
     });
@@ -75,8 +83,11 @@ export class DriverRegisterComponent {
   resetForm() {
     this.registerForm.reset({
       photo: '',
-      complete_name: '',
+      first_name: '',
+      last_name: '',
       dni: '',
+      phone_number: '',
+      email: '',
       license_number: '',
       license_photo: ''
     });

@@ -1,28 +1,56 @@
 <div class="departure-container">
   <h1>Create new record</h1>
 
-  <mat-form-field>
-    <mat-label>Choose a date</mat-label>
-    <input matInput [matDatepicker]="picker">
-    <mat-hint>MM/DD/YYYY</mat-hint>
-    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
+  <!-- Date Picker -->
+  <mat-form-field appearance="outline" class="date-picker">
+    <mat-label>Select a date</mat-label>
+    <input
+      matInput
+      [matDatepicker]="picker"
+      [(ngModel)]="selectedDate"
+      [min]="minDate"
+      [max]="maxDate"
+    />
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker
+      #picker
+      startView="month"
+      panelClass="example-month-picker"
+    ></mat-datepicker>
   </mat-form-field>
 
-  <p>Schedule assignment</p>
-
-  <mat-form-field>
-    <mat-label>Select a bus unit</mat-label>
-    <mat-select [(ngModel)]="selectedBusUnit">
-      <mat-option *ngFor="let busUnit of busUnits" [value]="busUnit">
-        {{ busUnit.name }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-
-  <mat-form-field>
-    <input matInput type="number" placeholder="Number of laps" [(ngModel)]="numberOfLaps" min="1" max="10">
+  <!-- Form Row for Bus Unit Selector and Number of Laps Input -->
+  <div class="form-row" *ngIf="selectedDate">
+    <mat-form-field appearance="outline" class="bus-unit">
+      <mat-label>Select bus unit</mat-label>
+      <mat-select
+        [(ngModel)]="selectedBusUnit"
+        (selectionChange)="onBusUnitSelected($event)"
+      >
+        <mat-option *ngFor="let busUnit of busUnits" [value]="busUnit">
+          {{ busUnit.id }}
+        </mat-option>
+      </mat-select>
     </mat-form-field>
 
-    <button mat-raised-button (click)="openAssignDialog()">Assign</button>
+    <!-- Number of Laps Input -->
+    <mat-form-field appearance="outline" class="laps" *ngIf="selectedBusUnit">
+      <mat-label>Número de vueltas</mat-label>
+      <input matInput type="number" [(ngModel)]="numberOfLaps" min="1" />
+    </mat-form-field>
+  </div>
+
+  <!-- Add to Table Button -->
+  <button
+    mat-raised-button
+    [disabled]="!selectedDate || !selectedBusUnit"
+    (click)="openAssignDialog()"
+  >
+    Assign
+  </button>
 </div>
+
+<app-departure-schedule-table
+  [enableEditing]="false"
+  [enableDateInfo]="false"
+></app-departure-schedule-table>

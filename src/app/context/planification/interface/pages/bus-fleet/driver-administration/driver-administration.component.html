@@ -1,16 +1,26 @@
-<div class="p-8 flex flex-column min-h-screen justify-content-between">
-
-  <div class="header-section flex justify-content-between align-items-center">
-    <h1>Driver List</h1>
-    <app-user-profile-card [user]="currentUser"></app-user-profile-card>
+<div class="flex flex-column justify-content-between">
+  <div class="flex flex-column">
+    <div class="flex align-items-center justify-content-start font-bold border-round ">
+      <button mat-icon-button color="primary" (click)="goBack()">
+        <mat-icon>arrow_back_ios</mat-icon>
+      </button>
+      <h1 class="font-bold ml-2 mb-0">Driver List</h1>
+    </div>
   </div>
 
+  <div class="flex align-items-end justify-content-end">
   <button
-    mat-flat-button color="primary w-full lg:w-3"
+    mat-flat-button 
+    color="primary w-full lg:w-3"
     class="big-button"
     (click)="navigateToAddNewDriver()"
   >
     Add New Driver</button>
+  </div>
+
+  <div class="mt-5">
+    <mat-divider></mat-divider>
+  </div>
 
   <div class="drivers-container">
 
@@ -30,8 +40,6 @@
       </mat-paginator>
 
     </div>
-
-
   </div>
 
 

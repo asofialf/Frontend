@@ -1,11 +1,10 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
-
 import {FormBuilder, Validators, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BreakpointObserver} from '@angular/cdk/layout';
 import {StepperOrientation, MatStepperModule} from '@angular/material/stepper';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
-import {MatButtonModule} from '@angular/material/button';
+import {MatButtonModule} from '@angular/material/button'; 
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {AsyncPipe} from '@angular/common';
@@ -15,6 +14,7 @@ import {MatSort, Sort, MatSortModule} from '@angular/material/sort';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import {LiveAnnouncer} from '@angular/cdk/a11y';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import { Location } from '@angular/common';
 
 import { Stop } from '../../../../domain/models/stop.dto';
 import {SubscriptionPlanComponent} from "./components/subscription-plan/subscription-plan.component";
@@ -69,8 +69,8 @@ export default class CreateNewItineraryComponent implements AfterViewInit  {
   constructor(
     private _formBuilder: FormBuilder,
     breakpointObserver: BreakpointObserver,
-    private _liveAnnouncer: LiveAnnouncer
-
+    private _liveAnnouncer: LiveAnnouncer,
+    private location: Location
   ) {
     this.stepperOrientation = breakpointObserver
       .observe('(min-width: 800px)')
@@ -82,5 +82,8 @@ export default class CreateNewItineraryComponent implements AfterViewInit  {
 
   }
 
+  goBack(): void {
+    this.location.back();
+  }
 
 }

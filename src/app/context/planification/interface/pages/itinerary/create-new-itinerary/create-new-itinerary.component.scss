@@ -1,9 +1,7 @@
 h1{
-    color: var(--color-primary)
-}
-
-.itinerary-container{
-    margin: 50px 50px 50px 50px;
+    color: var(--color-primary);
+    font-family: Urbanist, "Helvetica Neue", sans-serif;
+    font-size: 2em;
 }
 
 .title{
@@ -16,7 +14,6 @@ h1{
     border-radius: 8px;
     box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
 } 
-
 
 .payment{
     background: white;

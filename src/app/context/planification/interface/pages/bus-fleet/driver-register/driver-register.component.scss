@@ -1,5 +1,7 @@
 h1{
-  color: var(--color-primary)
+  color: var(--color-primary);
+  font-family: 'Urbanist', sans-serif;
+  font-weight: bold;
 }
 
 p{
@@ -8,11 +10,13 @@ p{
 
 .label{
   color: black;
-  font-size: 18px;
+  font-family: 'Urbanist', sans-serif;
 }
 .form-container{
-  border: 1px solid var(--color-primary);
-  border-radius: 15px ;
+  border-radius: 5px ;
+  background-color: white;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1),
+
 }
 
 .error {
@@ -36,8 +40,8 @@ p{
 }
 
 .big-button {
-  border-radius: 15px;
-  border: 2px solid var(--color-primary);
+  border-radius: 5px;
+  border: 1px solid var(--color-primary);
   padding: 10px 50px;
   font-size: 1rem;
   color: var(--color-primary);
@@ -45,6 +49,7 @@ p{
   background-color: #FFFFFF;
   cursor: pointer;
   transition-duration: 0.4s;
+  font-family: 'Urbanist', sans-serif;
 }
 
 .big-button:hover {
@@ -56,12 +61,17 @@ p{
 
 .input-file{
   color: black;
+  font-family: 'Urbanist', sans-serif;
+}
+
+span{
+  font-family: 'Urbanist', sans-serif;
 }
 
 .input-style{
-  padding: 12px 20px; // Aumenta el padding para mayor altura y mejor ergonomía
-  border-radius: 8px; // Bordes redondeados
-  border: 2px solid #ccc; // Borde sólido con color suave
+  height:2rem;
+  border-radius: 5px; // Bordes redondeados
+  border: 1px solid #ccc; // Borde sólido con color suave
   box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1); // Sombra interior para profundidad
   outline: none; // Elimina el borde de foco predeterminado
   width: 100%; // Ocupa todo el ancho disponible
