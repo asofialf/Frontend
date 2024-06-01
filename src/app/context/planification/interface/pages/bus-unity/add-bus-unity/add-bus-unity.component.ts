@@ -1,12 +1,25 @@
 import { Component } from '@angular/core';
+import {Location, NgForOf, NgIf} from "@angular/common";
 
 @Component({
   selector: 'app-add-bus-unity',
   standalone: true,
-  imports: [],
+  imports: [
+    NgForOf,
+    NgIf,],
   templateUrl: './add-bus-unity.component.html',
   styleUrl: './add-bus-unity.component.scss'
 })
 export class AddBusUnityComponent {
-
+  constructor(private location:Location){}
+  onSubmit() {
+    console.log('Hola');
+  }
+  goBack(){
+    this.location.back();
+  }
+  shouldShowError(controlName: string): boolean {
+    const control = this.registerForm.get(controlName);
+    return <boolean>control?.invalid && (control?.touched || this.isSubmitted);
+  }
 }

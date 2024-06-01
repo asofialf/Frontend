@@ -1,1 +1,33 @@
-<p>add-bus-unity works!</p>
+<div class="pr-8 pl-8 pt-3 pb-3 flex flex-column gap-4">
+<button class="back-button" (click)="goBack()">&#9664; Back</button>
+<h1>Add New Bus Unit</h1>
+
+<div class="form-container  h-auto">
+    <div class="m-auto pt-4 pb-4 pr-8 pl-8">
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+            <!-- -->
+            <div class="field grid">
+                <label class="label col-12 mb-2 md:col-2 md:mb-0">2. Complete Name</label>
+                <div class="col-12 md:col-10">
+                  <input type="text" class="input input-style w-full" formControlName="complete_name">
+                  <span *ngIf="shouldShowError('complete_name')" class="error">Complete name is required</span>
+                </div>
+              </div>
+              <div class="field grid">
+                <label class="label col-12 mb-2 md:col-2 md:mb-0">2. Complete Name</label>
+                <div class="col-12 md:col-10">
+                  <input type="text" class="input input-style w-full" formControlName="complete_name">
+                  <span *ngIf="shouldShowError('complete_name')" class="error">Complete name is required</span>
+                </div>
+              </div>
+              <div class="field grid">
+                <label class="label col-12 mb-2 md:col-2 md:mb-0">2. Complete Name</label>
+                <div class="col-12 md:col-10">
+                  <input type="text" class="input input-style w-full" formControlName="complete_name">
+                  <span *ngIf="shouldShowError('complete_name')" class="error">Complete name is required</span>
+                </div>
+              </div>
+        </form>
+    </div>
+</div>
+</div>
