@@ -36,4 +36,7 @@ export class BusFleetHomePageComponent {
     this.router.navigate(['/bus-fleet/drivers']);
   }
 
+  navigateToBusUnity(): void {
+    this.router.navigate(['/bus-fleet/unity']);
+  }
 }

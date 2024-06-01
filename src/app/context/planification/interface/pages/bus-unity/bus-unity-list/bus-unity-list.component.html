@@ -1,0 +1,49 @@
+<div class="bus-units-container">
+    <h1>Bus units</h1>
+    <mat-form-field>
+        <mat-label>Driver</mat-label>
+        <mat-select>
+            @for (driver of drivers; track driver) {
+            <mat-option [value]="driver.id">{{driver.first_name}}</mat-option>
+            }
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>License plate</mat-label>
+        <mat-select>
+            @for (bus of buses; track bus) {
+            <mat-option [value]="bus.id">{{bus.license_plate}}</mat-option>
+            }
+        </mat-select>
+    </mat-form-field>
+    <button mat-flat-button color="primary" class="add-unit-button" (click)="goToAddBusUnit()">
+        Add bus unit
+    </button>
+
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+        <!-- Driver Column -->
+        <ng-container matColumnDef="drivers_id">
+            <th mat-header-cell *matHeaderCellDef> Driver </th>
+            <td mat-cell *matCellDef="let element"> {{element.drivers_id}} </td>
+        </ng-container>
+
+        <!-- Associated bus Column -->
+        <ng-container matColumnDef="buses_id">
+            <th mat-header-cell *matHeaderCellDef> Associated bus </th>
+            <td mat-cell *matCellDef="let element"> {{element.buses_id}} </td>
+        </ng-container>
+
+        <!-- Actions Column -->
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef> Actions </th>
+            <td mat-cell *matCellDef="let element">
+                <button mat-flat-button color="primary" (click)="goToEditBusUnit()">Edit</button>
+                <button mat-flat-button color="warn">Delete</button>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</div>
