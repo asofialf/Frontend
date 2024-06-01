@@ -1,5 +1,7 @@
 h1{
-  color: var(--color-primary)
+  color: var(--color-primary);
+  font-family: Urbanist, sans-serif;
+  font-weight: bold;
 }
 
 p{
@@ -12,12 +14,13 @@ p{
 }
 
 .bordered-card {
-  border: 2px solid #dee2e6;
-  border-radius: 8px;
+  border: 1px solid #dee2e6;
+  border-radius: 5px;
   transition: border-color 0.3s;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1),
 }
 .bordered-card:hover {
-  border-color: #556BDA;
+  border-color: var(--color-primary);
 }
 
 .header-section {

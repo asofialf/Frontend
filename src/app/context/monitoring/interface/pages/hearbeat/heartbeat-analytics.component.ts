@@ -1,14 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { MatIcon } from '@angular/material/icon'; 
-import {MatButtonModule} from '@angular/material/button'; 
-import {Driver} from "../../../../planification/domain/models/driver";
-import {MatCardModule} from '@angular/material/card';
-
-import {DriversService} from "../../../../planification/application/service/drivers.service";
 import { ActivatedRoute } from '@angular/router';
-import { BackButtonComponent } from '../../../../shared/components/back-button/back-button.component';
 import { firstValueFrom } from 'rxjs';
 
+import { MatIcon } from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
+import {MatCardModule} from '@angular/material/card';
+
+import {Driver} from "../../../../planification/domain/models/driver";
+
+import {DriversService} from "../../../../planification/application/service/drivers.service";
+
+import { BackButtonComponent } from '../../../../shared/components/back-button/back-button.component';
+import { DriverInfoComponent } from './components/driver-info/driver-info.component';
+import { HeartbeatGraphComponent } from './components/heartbeat-graph/heartbeat-graph.component';
 @Component({
   selector: 'app-heartbeat-analytics',
   standalone: true,
@@ -16,20 +20,21 @@ import { firstValueFrom } from 'rxjs';
     MatCardModule,
     MatIcon,
     MatButtonModule,
-    BackButtonComponent
+    BackButtonComponent,
+    DriverInfoComponent,
+    HeartbeatGraphComponent
   ],
   templateUrl: './heartbeat-analytics.component.html',
   styleUrl: './heartbeat-analytics.component.scss'
 })
 export class HeartbeatAnalyticsComponent implements OnInit{
 
-  driverId: number ; 
+  driverId: number ;
   driver: Driver;
-  defaultImage: string = 'assets/images/planification/bus_flote/bus_driver_logo.png';
 
   constructor(
     private route: ActivatedRoute,
-    private driversService:DriversService, 
+    private driversService:DriversService,
   ) {
     this.driver = new Driver();
     this.driverId = 0;
@@ -37,6 +42,8 @@ export class HeartbeatAnalyticsComponent implements OnInit{
   ngOnInit(): void {
     this.driverId = +this.route.snapshot.paramMap.get('id')!
     this.getDriverById(this.driverId);
+
+    console.log('get fullName'  + this.driver.fullName);
   }
 
   async getDriverById(id: number): Promise<void> {
@@ -45,10 +52,6 @@ export class HeartbeatAnalyticsComponent implements OnInit{
     } catch (error) {
       console.error('Error fetching driver:', error);
     }
-  }
-
-  handleImageError(event: Event): void {
-    (event.target as HTMLImageElement).src = this.defaultImage;
   }
 
 }
