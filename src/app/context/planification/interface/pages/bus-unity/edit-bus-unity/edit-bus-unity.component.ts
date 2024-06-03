@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {Location, NgForOf, NgIf} from "@angular/common";
 
 @Component({
   selector: 'app-edit-bus-unity',
@@ -8,5 +9,8 @@ import { Component } from '@angular/core';
   styleUrl: './edit-bus-unity.component.scss'
 })
 export class EditBusUnityComponent {
-
+  constructor(private location:Location){}
+  goBack(){
+    this.location.back();
+  }
 }

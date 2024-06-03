@@ -1,56 +1,70 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
-import {MatIconModule} from '@angular/material/icon';
-import {MatDividerModule} from '@angular/material/divider';
-import {MatButtonModule} from '@angular/material/button';
 import {MatSelectModule} from '@angular/material/select';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatTableModule } from '@angular/material/table';
+import { Router, ActivatedRoute } from '@angular/router';
+import { DriversService } from '../../../../application/service/drivers.service';
+import { BusUnitService } from '../../../../application/service/bus-unit.service';
+import { AccountService } from '../../../../../account/application/service/account.service';
 import { Driver } from '../../../../domain/models/driver';
-import { Bus } from '../../../../domain/models/bus';
 import { BusUnit } from '../../../../domain/models/bus_unit';
-import {MatTable, MatTableModule} from '@angular/material/table';
-import {Router, RouterLink, RouterOutlet, ActivatedRoute} from '@angular/router';
+import { UserProfileCardInformation } from '../../../../../account/domain/models/userProfileCardInformation';
 
-const BUS_UNIT_DATA: BusUnit[] = [
-  {id: 1, buses_id: 1, drivers_id: 1, transport_companies_id: 1},
-]
-
-const DRIVER_DATA: Driver[] = [
-  {id: 1, first_name: 'Diego', last_name: 'Merino', driver_license_number: 'UR589OP123', image_url: 'https://cdn-icons-png.flaticon.com/512/3135/3135715.png', contact_information_id: 98435692, smart_bands_id: 23456}
-  ];
-
-const BUS_DATA: Bus[] = [
-  {id: 1, license_plate: 'AWS435', bus_model_id: 34}
-  ];
-  
 @Component({
   selector: 'app-bus-unity-list',
   standalone: true,
-  imports: [
-    MatFormFieldModule, 
-    MatSelectModule, 
-    MatInputModule, 
-    FormsModule,
-    MatTableModule,
-    MatButtonModule, 
-    MatDividerModule, 
-    MatIconModule,
-    RouterLink,
-    RouterOutlet],
+  imports: [FormsModule, MatInputModule, MatSelectModule, MatFormFieldModule, MatTableModule],
   templateUrl: './bus-unity-list.component.html',
-  styleUrl: './bus-unity-list.component.scss'
+  styleUrls: ['./bus-unity-list.component.scss']
 })
-export class BusUnityListComponent {
+export class BusUnityListComponent implements OnInit {
 
-  constructor(private router:Router, private route: ActivatedRoute){
+  currentUser: UserProfileCardInformation;
+  displayedColumns: string[] = ['driver_name', 'buses_id', 'actions'];
+  dataSource: { driver_name: string; id: number; buses_id: number; drivers_id: number; transport_companies_id: number; }[] = [];
+  drivers: Driver[] = [];
 
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private driversService: DriversService,
+    private busUnitService: BusUnitService,
+    private accountService: AccountService
+  ) {
+    this.currentUser = this.accountService.getCurrentUser();
   }
 
-  displayedColumns: string[] = ['drivers_id', 'buses_id', 'actions'];
-  dataSource = BUS_UNIT_DATA;
-  drivers = DRIVER_DATA;
-  buses = BUS_DATA;
+  ngOnInit() {
+    this.loadDrivers();
+  }
+
+  loadDrivers(): void {
+    this.driversService.getAllDrivers().subscribe({
+      next: (data) => {
+        this.drivers = data;
+        this.loadBusUnits();
+      },
+      error: (err) => console.error('Error fetching drivers:', err)
+    });
+  }
+
+  loadBusUnits(): void {
+    this.busUnitService.getBusUnits().subscribe({
+      next: (busUnits) => {
+        this.dataSource = busUnits.map(busUnit => {
+          const driver = this.drivers.find(d => d.id === busUnit.drivers_id);
+          return {
+            ...busUnit,
+            driver_name: driver ? `${driver.first_name} ${driver.last_name}` : 'Unknown Driver'
+          };
+        });
+      },
+      error: (err) => console.error('Error fetching bus units:', err)
+    });
+  }
+  
 
   goToAddBusUnit(): void {
     this.router.navigate(['add-bus-unit'], {

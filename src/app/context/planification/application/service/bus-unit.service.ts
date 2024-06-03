@@ -9,8 +9,7 @@ import {Observable} from "rxjs";
 })
 
 export class BusUnitService {
-  private baseUrl =
-    'https://my-json-server.typicode.com/TechSolutions-2024-I-IOT/PlanificationBoundedContext/bus_unit';
+  private baseUrl = 'https://my-json-server.typicode.com/TechSolutions-2024-I-IOT/PlanificationBoundedContext/bus_unit';
 
   constructor(private http: HttpClient) {}
 
