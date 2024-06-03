@@ -15,4 +15,5 @@ export class BusService {
     getBusesByUserId(id: number): Observable<Bus[]> {
         return this.http.get<Bus[]>(`${this.baseUrl}/buses?userId=${id}`);
     }
+    
 }
