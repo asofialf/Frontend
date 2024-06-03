@@ -3,11 +3,11 @@
     <h1>Bus units</h1>
     <mat-form-field class="search-bus-unity-driver">
       <mat-label>Driver</mat-label>
-      <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Jaime Buendia" #input>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Jaime Buendia" #inputDriver>
     </mat-form-field>
     <mat-form-field class="search-bus-unity-license">
       <mat-label>License plate</mat-label>
-      <input matInput (keyup)="applyFilter($event)" placeholder="Ex. 101" #input>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Ex. 101" #inputLicense>
     </mat-form-field>
     <button mat-flat-button color="primary" class="add-unit-button" (click)="goToAddBusUnit()">
       Add bus unit
@@ -15,18 +15,17 @@
 
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
-      <!-- Driver Column -->
-      <ng-container matColumnDef="driver_name">
-        <th mat-header-cell *matHeaderCellDef> Driver </th>
-        <td mat-cell *matCellDef="let element"> {{ element.driver_name }} </td>
+      <!-- Driver ID Column -->
+      <ng-container matColumnDef="drivers_id">
+        <th mat-header-cell *matHeaderCellDef> Driver ID </th>
+        <td mat-cell *matCellDef="let element"> {{ element.drivers_id }} </td>
       </ng-container>
 
-      <!-- Associated bus Column -->
-      <ng-container matColumnDef="buses_license_plate">
-        <th mat-header-cell *matHeaderCellDef> Associated bus </th>
-        <td mat-cell *matCellDef="let element"> {{ element.buses_license_plate }} </td>
+      <!-- Associated Bus ID Column -->
+      <ng-container matColumnDef="buses_id">
+        <th mat-header-cell *matHeaderCellDef> Associated Bus ID </th>
+        <td mat-cell *matCellDef="let element"> {{ element.buses_id }} </td>
       </ng-container>
-
       <!-- Actions Column -->
       <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef> Actions </th>

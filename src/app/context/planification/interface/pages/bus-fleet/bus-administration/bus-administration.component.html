@@ -1,11 +1,17 @@
-<div class="p-8">
-
-  <div class="header-section flex justify-content-between align-items-center">
-    <h1>Buses</h1>
-    <app-user-profile-card [user]="currentUser"></app-user-profile-card>
+<div>
+  <div class="flex flex-column">
+    <div class="flex align-items-center justify-content-start font-bold border-round ">
+      <app-back-button></app-back-button>
+      <h1 class="ml-2 mb-0">Buses</h1>
+    </div>
+  </div>
+  <div class="flex align-items-end justify-content-end">
+    <button mat-flat-button color="primary" class="big-button">Añadir Bus</button>
   </div>
 
-  <button mat-flat-button color="primary" class="big-button">Add bus</button>
+  <div class="my-5">
+    <mat-divider></mat-divider>
+  </div>
 
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
@@ -13,12 +19,6 @@
     <ng-container matColumnDef="licensePlate">
       <th mat-header-cell *matHeaderCellDef> Placa </th>
       <td mat-cell *matCellDef="let element"> {{element.licensePlate}} </td>
-    </ng-container>
-
-    <!-- Model Column -->
-    <ng-container matColumnDef="model">
-      <th mat-header-cell *matHeaderCellDef> Modelo </th>
-      <td mat-cell *matCellDef="let element"> {{element.model}} </td>
     </ng-container>
 
     <!-- Year Column -->

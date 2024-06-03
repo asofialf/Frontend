@@ -25,73 +25,40 @@ import { BusService } from '../../../../application/service/bus.service';
 })
 export class BusUnityListComponent implements OnInit {
 
-  currentUser: UserProfileCardInformation;
-  displayedColumns: string[] = ['driver_name', 'buses_license_plate', 'actions'];
-  dataSource: { driver_name: string; id: number; buses_id: number; drivers_id: number; transport_companies_id: number; }[] = [];
-  drivers: Driver[] = [];
-  buses: Bus[] = [];
-  filteredDrivers: Driver[] = [];
-  selectedDriver: string = '';
+  dataSource: BusUnit[] = [];
+  displayedColumns: string[] = ['drivers_id', 'buses_id', 'actions'];
 
-  constructor(
+  constructor(private busUnitService: BusUnitService,
     private router: Router,
     private route: ActivatedRoute,
-    private driversService: DriversService,
-    private busUnitService: BusUnitService,
-    private accountService: AccountService,
-    private busService: BusService
-  ) {
-    this.currentUser = this.accountService.getCurrentUser();
-  }
+  ) {}
 
   ngOnInit() {
-    this.loadDrivers();
-    //this.loadBuses();
+    this.loadBusUnits();
   }
-
-  loadDrivers(): void {
-    this.driversService.getAllDrivers().subscribe({
-      next: (data) => {
-        this.drivers = data;
-        this.filteredDrivers = data;
-        this.loadBusUnits();
-      },
-      error: (err) => console.error('Error fetching drivers:', err)
-    });
-  }
-
-  /*loadBuses(): void{
-    this.busService.getBusesByUserId(1).subscribe({
-      next: (data) => {
-        this.buses = data;
-        this.loadBusUnits();
-      },
-      error: (err) => console.error('Error fetching drivers:', err)
-    })
-  }*/
 
   loadBusUnits(): void {
-    this.busUnitService.getBusUnits().subscribe({
-      next: (busUnits) => {
-        this.dataSource = busUnits.map(busUnit => {
-          const driver = this.drivers.find(d => d.id === busUnit.drivers_id);
-          //const bus = this.buses.find(d => d.id === busUnit.buses_id);
-          return {
-            ...busUnit,
-            driver_name: driver ? `${driver.first_name} ${driver.last_name}` : 'Unknown Driver'
-            //buses_license_plate: bus ? bus.license_plate : 'Unknown Bus'
-          };
-        });
+    this.busUnitService.getBusUnits(2).subscribe({
+      next: (data: any[]) => { // Suponiendo que data es un array de objetos con el formato dado
+        this.dataSource = data.map(item => this.mapToBusUnit(item));
       },
       error: (err) => console.error('Error fetching bus units:', err)
     });
   }
 
+  mapToBusUnit(item: any): BusUnit {
+    return {
+      id: item.id,
+      buses_id: item.bus.id,
+      drivers_id: item.driver.id,
+      transport_companies_id: 0 // Ajusta esto según tus necesidades
+    };
+  }
+
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
-    //this.dataSource.filter = filterValue.trim().toLowerCase();
+    // this.dataSource.filter = filterValue.trim().toLowerCase();
   }
-  
 
   goToAddBusUnit(): void {
     this.router.navigate(['add-bus-unit'], {

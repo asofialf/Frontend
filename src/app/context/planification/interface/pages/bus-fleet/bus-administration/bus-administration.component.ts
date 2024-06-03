@@ -5,6 +5,9 @@ import {MatButton} from "@angular/material/button";
 import {UserProfileCardComponent} from "../../../../../shared/components/user-profile-card/user-profile-card.component";
 import {AccountService} from "../../../../../account/application/service/account.service";
 import {UserProfileCardInformation} from "../../../../../account/domain/models/userProfileCardInformation";
+import {MatDividerModule} from '@angular/material/divider';
+
+import { BackButtonComponent } from '../../../../../shared/components/back-button/back-button.component';
 
 export interface Bus {
   id: number;
@@ -32,14 +35,16 @@ const BUS_DATA: Bus[] = [
     MatTableModule,
     RouterOutlet,
     MatButton,
-    UserProfileCardComponent
+    UserProfileCardComponent,
+    BackButtonComponent,
+    MatDividerModule
   ],
   templateUrl: './bus-administration.component.html',
   styleUrl: './bus-administration.component.scss'
 })
 
 export class BusAdministrationComponent {
-  displayedColumns: string[] = ['licensePlate', 'model', 'year', 'seatCapacity','totalCapacity'];
+  displayedColumns: string[] = ['licensePlate', 'year', 'seatCapacity','totalCapacity'];
   dataSource = BUS_DATA;
 
   currentUser:UserProfileCardInformation;

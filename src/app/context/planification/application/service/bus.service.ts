@@ -3,7 +3,7 @@ import { HttpClient, HttpClientModule } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { Bus } from '../../domain/models/bus';
 
-Injectable({
+@Injectable({
     providedIn: 'root',
 })
 

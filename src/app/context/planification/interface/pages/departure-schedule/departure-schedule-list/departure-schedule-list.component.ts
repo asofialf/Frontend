@@ -28,11 +28,7 @@ import { Bus } from '../../../../domain/models/bus';
 
 import {combineLatest, of} from "rxjs";
 import {DepartureScheduleDetailComponent} from "../departure-schedule-detail/departure-schedule-detail.component";
-
-const BUS_TEMPLATE: Bus[] = [
-  {id: 1, license_plate:'239-CSA', bus_model_id: 1},
-  {id: 2,license_plate:'249-CSA', bus_model_id: 2},
-];
+import { BusService } from '../../../../application/service/bus.service';
 
 @Component({
   selector: 'app-departure-schedule-list',
@@ -54,6 +50,7 @@ const BUS_TEMPLATE: Bus[] = [
 })
 export class DepartureScheduleListComponent implements OnInit {
   openedAccordion: DepartureScheduleDisplay | null = null;
+  buses: Bus[] = [];
 
   toggleAccordion(schedule: DepartureScheduleDisplay) {
     const departures$ = this.departureService.getDepartures(schedule.id);
@@ -73,7 +70,7 @@ export class DepartureScheduleListComponent implements OnInit {
     private route: ActivatedRoute,
     private departureService: DepartureService,
     private driversService: DriversService,
-    // private busService: BusService,
+    private busService: BusService,
     private busUnitService: BusUnitService,
     matDialog: MatDialog // Rename the parameter
   ) {
@@ -82,17 +79,27 @@ export class DepartureScheduleListComponent implements OnInit {
 
   ngOnInit() {
     this.loadDepartureScheduleDisplays();
+    this.loadBuses();
+  }
+
+  loadBuses(){
+    this.busService.getBusesByUserId(2).subscribe({
+      next: (data) => {
+        this.buses = data;
+      },
+      error: (err) => console.error('Error fetching buses:', err)
+    });
   }
 
   getBusByID(busId: number): Bus | undefined {
-    return BUS_TEMPLATE.find(bus => bus.id === busId);
+    return this.buses.find(bus => bus.id === busId);
   }
 
   loadDepartureScheduleDisplays(): void {
     const departureSchedules$ = this.departureService.getDepartureSchedules();
-    const busUnits$ = this.busUnitService.getBusUnits();
-    const drivers$ = this.driversService.getAllDrivers();
-    const buses$ = of(BUS_TEMPLATE);
+    const busUnits$ = this.busUnitService.getBusUnits(2);
+    const drivers$ = this.driversService.getAllDrivers(2);
+    const buses$ = this.busService.getBusesByUserId(2);
     let departuresByScheduleId: { [key: number]: Departure[] } = {};
 
     combineLatest([departureSchedules$, busUnits$, drivers$, buses$])
@@ -115,8 +122,8 @@ export class DepartureScheduleListComponent implements OnInit {
               departure_date: schedule.departure_date,
               bus_unit_id: schedule.bus_unit_id,
               shift_start: schedule.shift_start,
-              driver: driver ? `${driver.first_name} ${driver.last_name}` : 'Unknown',
-              bus: bus ? bus.license_plate : 'Unknown',
+              driver: driver ? `${driver.firstName} ${driver.lastName}` : 'Unknown',
+              bus: bus ? bus.licensePlate : 'Unknown',
               departures: [],
             };
           });
