@@ -8,6 +8,9 @@ import {UserProfileCardInformation} from "../../../../../account/domain/models/u
 import {MatDividerModule} from '@angular/material/divider';
 
 import { BackButtonComponent } from '../../../../../shared/components/back-button/back-button.component';
+import { MatDialog, MatDialogModule} from '@angular/material/dialog';
+
+import { ModalBusComponent } from './components/modal-bus/modal-bus.component';
 
 export interface Bus {
   id: number;
@@ -37,19 +40,28 @@ const BUS_DATA: Bus[] = [
     MatButton,
     UserProfileCardComponent,
     BackButtonComponent,
-    MatDividerModule
+    MatDividerModule,
+    MatDialogModule
   ],
   templateUrl: './bus-administration.component.html',
   styleUrl: './bus-administration.component.scss'
 })
 
 export class BusAdministrationComponent {
+
   displayedColumns: string[] = ['licensePlate', 'year', 'seatCapacity','totalCapacity'];
   dataSource = BUS_DATA;
 
   currentUser:UserProfileCardInformation;
 
-  constructor(private accountService:AccountService) {
+  constructor(
+    private accountService:AccountService,
+    public dialog: MatDialog
+  ) {
     this.currentUser= this.accountService.getCurrentUser()
+  }
+
+  openDialog() : void {
+    this.dialog.open(ModalBusComponent);
   }
 }
