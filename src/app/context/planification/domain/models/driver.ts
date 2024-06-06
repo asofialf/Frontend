@@ -18,7 +18,7 @@ export class Driver {
     photoUrl: string = '',
     phoneNumber: string = '',
     email: string = '',
-    user: number 
+    user: number =0,
   ) {
     this.id = id;
     this.firstName = firstName;

@@ -25,6 +25,7 @@ import { Bus } from '../../../../domain/models/bus';
 
 import {combineLatest, of} from "rxjs";
 import {DepartureScheduleDetailComponent} from "../departure-schedule-detail/departure-schedule-detail.component";
+import { DepartureScheduleTableComponent } from '../../../components/departure-schedule/departure-schedule-table/departure-schedule-table.component';
 import { BusService } from '../../../../application/service/bus.service';
 
 @Component({
@@ -40,6 +41,7 @@ import { BusService } from '../../../../application/service/bus.service';
     MatInputModule,
     MatButtonModule,
     DepartureScheduleDetailComponent,
+    DepartureScheduleTableComponent
   ],
   templateUrl: './departure-schedule-list.component.html',
   styleUrls: ['./departure-schedule-list.component.scss'],

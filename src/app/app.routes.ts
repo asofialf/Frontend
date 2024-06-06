@@ -1,15 +1,19 @@
 import { Routes } from '@angular/router';
 
 export const routes: Routes = [
-  {
-      path: '',
-      loadComponent: () => import('./context/shared/layout/main-layout/main-layout.component').then(m=>m.default),
-      children: [
         {
-          path:'home',
-          title:'Home',
-          loadComponent: ()=>import('./context/monitoring/interface/pages/dashboard/dashboard.component').then(m=>m.DashboardComponent)
-        }
+        path: 'sign-in',
+        loadComponent: () => import('./context/shared/sign-in/sign-in.component').then(m=>m.SignInComponent),
+        },
+        {    
+          path: '',
+          loadComponent: () => import('./context/shared/layout/main-layout/main-layout.component').then(m=>m.default),
+          children: [
+          {
+            path:'home',
+            title:'Home',
+            loadComponent: ()=>import('./context/monitoring/interface/pages/dashboard/dashboard.component').then(m=>m.DashboardComponent)
+          }
         ,
         {
           path:'bus-fleet',

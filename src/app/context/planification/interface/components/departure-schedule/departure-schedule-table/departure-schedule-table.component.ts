@@ -19,8 +19,24 @@ import { combineLatest, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 const BUS_TEMPLATE: Bus[] = [
-  { id: 1, license_plate: '239-CSA', bus_model_id: 1 },
-  { id: 2, license_plate: '249-CSA', bus_model_id: 2 },
+  { 
+    id: 1, 
+    licensePlate: '239-CSA' ,
+    seatingCapacity: 30,
+    totalCapacity: 10,
+    year: 2024,
+    state: "good",
+    user: 1
+  },
+  {
+    id: 2,
+    licensePlate: '239-ABC',
+    seatingCapacity: 30,
+    totalCapacity: 10,
+    year: 2024,
+    state: "good",
+    user: 1
+  }
 ];
 
 @Component({
@@ -55,8 +71,8 @@ export class DepartureScheduleTableComponent implements OnInit {
   private loadDepartureScheduleDisplays() {
     // Placeholder: logic to reload schedules.
     const departureSchedules$ = this.departureService.getDepartureSchedules();
-    const busUnits$ = this.busUnitService.getBusUnits();
-    const drivers$ = this.driversService.getAllDrivers();
+    const busUnits$ = this.busUnitService.getBusUnits(1);
+    const drivers$ = this.driversService.getAllDrivers(1);
     const buses$ = of(BUS_TEMPLATE);
 
     combineLatest([departureSchedules$, busUnits$, drivers$, buses$])
@@ -77,9 +93,9 @@ export class DepartureScheduleTableComponent implements OnInit {
               bus_unit_id: schedule.bus_unit_id,
               shift_start: schedule.shift_start,
               driver: driver
-                ? `${driver.first_name} ${driver.last_name}`
+                ? `${driver.firstName} ${driver.lastName}`
                 : 'Unknown',
-              bus: bus ? bus.license_plate : 'Unknown',
+              bus: bus ? bus.licensePlate : 'Unknown',
               departures: [],
             };
           });

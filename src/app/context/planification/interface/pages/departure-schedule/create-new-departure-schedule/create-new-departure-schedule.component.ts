@@ -55,7 +55,7 @@ export class CreateNewDepartureScheduleComponent implements OnInit {
   }
 
   loadBusUnits(): void {
-    this.busUnitService.getBusUnits().subscribe(
+    this.busUnitService.getBusUnits(1).subscribe(
       (busUnits) => {
         this.busUnits = busUnits;
       },

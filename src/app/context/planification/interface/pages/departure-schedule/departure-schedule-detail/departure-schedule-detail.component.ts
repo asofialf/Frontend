@@ -1,11 +1,12 @@
 import { Component, Inject, Input, Output, EventEmitter } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Departure } from '../../../../domain/models/departure';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-departure-schedule-detail',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './departure-schedule-detail.component.html',
   styleUrl: './departure-schedule-detail.component.scss'
 })
