@@ -8,21 +8,18 @@ import {Observable} from "rxjs";
 })
 export class DriversService{
 
-  private apiUrl = 'https://my-json-server.typicode.com/TechSolutions-2024-I-IOT/PlanificationBoundedContext/drivers';
+  private apiUrl = 'http://localhost:8080/api/v1/transport-company';
 
   constructor(private http: HttpClient) {}
 
-  getAllDrivers(): Observable<Driver[]> {
-    return this.http.get<Driver[]>(this.apiUrl);
+  getAllDrivers(id: number): Observable<Driver[]> {
+    return this.http.get<Driver[]>(`${this.apiUrl}/drivers?userId=${id}`);
   }
-
-  getDriverById(id: number): Observable<Driver> {
+  getDriverById(id: number): Observable<Driver> { //falta el endpoint en el backend
     return this.http.get<Driver>(`${this.apiUrl}/${id}`);
   }
-
   addDriver(driverData: any): Observable<Driver> {
-    return this.http.post<Driver>(this.apiUrl,driverData);
+    return this.http.post<Driver>(`${this.apiUrl}/register-driver`, driverData);
   }
-
 
 }

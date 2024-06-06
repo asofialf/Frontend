@@ -25,6 +25,26 @@ export const routes: Routes = [
               loadComponent:()=> import("./context/planification/interface/pages/bus-fleet/bus-administration/bus-administration.component").then(m=>m.BusAdministrationComponent)
             },
             {
+              path:'unity',
+              children: [
+                {
+                  path:'',
+                  title:'Unity',
+                  loadComponent:()=> import("./context/planification/interface/pages/bus-unity/bus-unity-list/bus-unity-list.component").then(m=>m.BusUnityListComponent)
+                },
+                {
+                  path:'add-bus-unit',
+                  title:'Add Bus Unit',
+                  loadComponent:()=> import("./context/planification/interface/pages/bus-unity/add-bus-unity/add-bus-unity.component").then(m=>m.AddBusUnityComponent)
+                },
+                {
+                  path:'edit-bus-unit',
+                  title:'Edit Bus Unit',
+                  loadComponent:()=> import("./context/planification/interface/pages/bus-unity/edit-bus-unity/edit-bus-unity.component").then(m=>m.EditBusUnityComponent)
+                },
+              ]
+            },
+            {
               path:'drivers',
               children:[
                 {

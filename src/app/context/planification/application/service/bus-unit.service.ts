@@ -9,13 +9,12 @@ import {Observable} from "rxjs";
 })
 
 export class BusUnitService {
-  private baseUrl =
-    'https://my-json-server.typicode.com/TechSolutions-2024-I-IOT/PlanificationBoundedContext/bus_unit';
+  private baseUrl = 'http://localhost:8080/api/v1/transport-company';
 
   constructor(private http: HttpClient) {}
 
-  getBusUnits(): Observable<BusUnit[]> {
-    return this.http.get<BusUnit[]>(this.baseUrl);
+  getBusUnits(id: number): Observable<BusUnit[]> {
+    return this.http.get<BusUnit[]>(`${this.baseUrl}/unit-buses?userId=${id}`);
   }
 
   getBusUnitById(id: number): Observable<BusUnit> {

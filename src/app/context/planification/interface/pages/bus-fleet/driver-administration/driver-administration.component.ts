@@ -59,9 +59,10 @@ export class DriverAdministrationComponent implements OnInit{
   }
 
   loadDrivers(): void {
-    this.driversService.getAllDrivers().subscribe({
+    this.driversService.getAllDrivers(2).subscribe({
       next: (data) => {
         this.drivers = data;
+        console.log(this.drivers);
         if (data.length > 0) {
           this.updatePaginatedDrivers(0);
         }
