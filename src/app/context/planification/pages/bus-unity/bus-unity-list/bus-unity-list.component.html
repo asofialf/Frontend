@@ -1,0 +1,43 @@
+<div class="pr-8 pl-8 pt-3 pb-3 flex flex-column gap-4">
+  <div class="bus-units-container">
+    <h1>Bus units</h1>
+    <mat-form-field class="search-bus-unity-driver">
+      <mat-label>Driver</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Jaime Buendia" #input>
+    </mat-form-field>
+    <mat-form-field class="search-bus-unity-license">
+      <mat-label>License plate</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Ex. 101" #input>
+    </mat-form-field>
+    <button mat-flat-button color="primary" class="add-unit-button" (click)="goToAddBusUnit()">
+      Add bus unit
+    </button>
+
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+      <!-- Driver Column -->
+      <ng-container matColumnDef="driver_name">
+        <th mat-header-cell *matHeaderCellDef> Driver </th>
+        <td mat-cell *matCellDef="let element"> {{ element.driver_name }} </td>
+      </ng-container>
+
+      <!-- Associated bus Column -->
+      <ng-container matColumnDef="buses_license_plate">
+        <th mat-header-cell *matHeaderCellDef> Associated bus </th>
+        <td mat-cell *matCellDef="let element"> {{ element.buses_license_plate }} </td>
+      </ng-container>
+
+      <!-- Actions Column -->
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef> Actions </th>
+        <td mat-cell *matCellDef="let element">
+          <button mat-flat-button color="primary" class="edit-button" (click)="goToEditBusUnit()">Edit</button>
+          <button mat-flat-button class="delete-button">Delete</button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+</div>

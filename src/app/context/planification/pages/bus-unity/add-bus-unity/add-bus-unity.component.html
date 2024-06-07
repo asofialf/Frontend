@@ -1,0 +1,38 @@
+<div class="pr-8 pl-8 pt-3 pb-3 flex flex-column gap-4">
+<button class="back-button" (click)="goBack()">&#9664; Back</button>
+<h1>Add New Bus Unit</h1>
+
+<div class="form-container  h-auto">
+  <div class="m-auto pt-4 pb-4 pr-8 pl-8">
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <!-- DRIVER -->
+      <div class="field grid">
+        <label class="label col-12 mb-2 md:col-2 md:mb-0">1. Driver</label>
+        <div class="col-12 md:col-10">
+          <input type="text" class="input input-style w-full" formControlName="driver">
+          <span *ngIf="shouldShowError('driver')" class="error">Driver is required</span>
+        </div>
+      </div>
+      <!-- BUS -->
+      <div class="field grid">
+        <label class="label col-12 mb-2 md:col-2 md:mb-0">2. Bus</label>
+        <div class="col-12 md:col-10">
+          <input type="text" class="input input-style w-full" formControlName="bus">
+          <span *ngIf="shouldShowError('bus')" class="error">Bus is required</span>
+        </div>
+      </div>
+
+      <div class="flex flex-column justify-content-center align-items-center gap-3  lg:flex-row lg:mt-6">
+        <div>
+          <button type="button" class="button big-button" (click)="resetForm()">Delete</button>
+        </div>
+        <div>
+          <button type="submit" class="button big-button">Save</button>
+        </div>
+
+      </div>
+
+    </form>
+  </div>
+
+</div>
