@@ -13,7 +13,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { DepartureScheduleTableComponent } from '../../../components/departure-schedule/departure-schedule-table/departure-schedule-table.component';
 import { BusUnitService } from '../../../service/bus-unit.service';
-import { BusUnit } from '../../../models/bus_unit'; // Import your BusUnit model
+import { BusUnit } from '../../../models/bus-unit'; // Import your BusUnit model
 
 @Component({
   selector: 'app-create-new-departure-schedule',

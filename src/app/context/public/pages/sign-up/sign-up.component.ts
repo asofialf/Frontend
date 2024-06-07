@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {MatSelectModule} from '@angular/material/select';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatToolbarModule} from '@angular/material/toolbar';
 
 import {AuthService} from "../../services/auth.service";
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
@@ -10,7 +11,7 @@ import { TokenService } from '../../../shared/services/token.service';
 @Component({
   selector: 'app-sign-up',
   standalone: true,
-  imports: [MatFormFieldModule, MatInputModule, MatSelectModule, ReactiveFormsModule],
+  imports: [MatFormFieldModule, MatInputModule, MatSelectModule, ReactiveFormsModule, MatToolbarModule],
   templateUrl: './sign-up.component.html',
   styleUrl: './sign-up.component.scss'
 })
@@ -24,6 +25,8 @@ export class SignUpComponent {
     private tokenService: TokenService
   ) { 
     this.signUpForm = this.fb.group({
+      firstName: [''],
+      lastName: [''],
       email: [''],
       password: [''],
       role: ['']

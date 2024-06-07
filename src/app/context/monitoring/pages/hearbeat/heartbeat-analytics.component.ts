@@ -42,8 +42,6 @@ export class HeartbeatAnalyticsComponent implements OnInit{
   ngOnInit(): void {
     this.driverId = +this.route.snapshot.paramMap.get('id')!
     this.getDriverById(this.driverId);
-
-    console.log('get fullName'  + this.driver.fullName);
   }
 
   async getDriverById(id: number): Promise<void> {

@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {BusUnit} from "../models/bus_unit";
+import {BusUnit} from "../models/bus-unit";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {Observable} from "rxjs";
 import { environment } from '../../../../environments/environment';

@@ -10,7 +10,7 @@ import { DepartureService } from '../../../service/departure.service';
 import { DriversService } from '../../../service/drivers.service';
 import { BusUnitService } from '../../../service/bus-unit.service';
 
-import { DepartureScheduleDisplay } from '../../../models/departure_schedule_display';
+import { DepartureScheduleDisplay } from '../../../models/departure-schedule-display';
 import { Departure } from '../../../models/departure';
 import { DepartureEditDialogComponent } from '../departure-edit-dialog/departure-edit-dialog.component';
 

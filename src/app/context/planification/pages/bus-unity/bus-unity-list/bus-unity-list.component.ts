@@ -11,8 +11,8 @@ import { BusUnitService } from '../../../service/bus-unit.service';
 import { AccountService } from '../../../../account/service/account.service';
 import {MatButtonModule} from '@angular/material/button';
 import { Driver } from '../../../models/driver';
-import { BusUnit } from '../../../models/bus_unit';
-import { UserProfileCardInformation } from '../../../../account/models/userProfileCardInformation';
+import { BusUnit } from '../../../models/bus-unit';
+import { UserProfile } from '../../../../account/models/user-profile';
 import { Bus } from '../../../models/bus';
 import { BusService } from '../../../service/bus.service';
 
@@ -25,7 +25,6 @@ import { BusService } from '../../../service/bus.service';
 })
 export class BusUnityListComponent implements OnInit {
 
-  currentUser: UserProfileCardInformation;
   displayedColumns: string[] = ['driver_name', 'buses_license_plate', 'actions'];
   dataSource: { driver_name: string; id: number; buses_id: number; drivers_id: number; transport_companies_id: number; }[] = [];
   drivers: Driver[] = [];
@@ -39,9 +38,7 @@ export class BusUnityListComponent implements OnInit {
     private driverService: DriversService,
     private router: Router,
     private route: ActivatedRoute,
-    private accountService: AccountService
   ) {
-    this.currentUser = this.accountService.getCurrentUser();
     this.userID = 2;
   }
 

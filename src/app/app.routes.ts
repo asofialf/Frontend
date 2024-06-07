@@ -9,6 +9,10 @@ export const routes: Routes = [
         path: 'sign-up',
         loadComponent: () => import('./context/public/pages/sign-up/sign-up.component').then(m=>m.SignUpComponent),
         },
+        {
+          path:'create-transport-company',
+          loadComponent: () => import('./context/planification/pages/transport-company/transport-company.component').then(m=>m.TransportCompanyComponent),
+        },
         {    
           path: '',
           loadComponent: () => import('./context/shared/pages/main-layout/main-layout.component').then(m=>m.default),
@@ -17,8 +21,11 @@ export const routes: Routes = [
             path:'home',
             title:'Home',
             loadComponent: ()=>import('./context/monitoring/pages/dashboard/dashboard.component').then(m=>m.DashboardComponent)
-          }
-        ,
+          },
+          {
+            path:'profile',
+            loadComponent: () => import('./context/account/pages/profile/profile.component').then(m=>m.ProfileComponent),
+          },
         {
           path:'bus-fleet',
           children:[

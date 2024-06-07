@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {HttpClientModule} from "@angular/common/http";
 import {AuthService} from "../../services/auth.service";
-
+import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatSelectModule} from '@angular/material/select';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -11,7 +11,7 @@ import { TokenService } from '../../../shared/services/token.service';
 @Component({
   selector: 'app-sign-in',
   standalone: true,
-  imports: [MatFormFieldModule, MatInputModule, MatSelectModule, ReactiveFormsModule],
+  imports: [MatFormFieldModule, MatInputModule, MatSelectModule, ReactiveFormsModule, MatToolbarModule],
   templateUrl: './sign-in.component.html',
   styleUrl: './sign-in.component.scss'
 })

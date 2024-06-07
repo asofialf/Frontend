@@ -7,7 +7,6 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { AccountService } from '../../../../account/service/account.service';
 import { BusUnitService } from '../../../service/bus-unit.service';
 import { UserProfileCardComponent } from "../../../../shared/components/user-profile-card/user-profile-card.component";
-import { UserProfileCardInformation } from "../../../../account/models/userProfileCardInformation";
 
 @Component({
   selector: 'app-add-bus-unity',
@@ -24,7 +23,7 @@ import { UserProfileCardInformation } from "../../../../account/models/userProfi
   styleUrl: './add-bus-unity.component.scss'
 })
 export class AddBusUnityComponent {
-  currentUser: UserProfileCardInformation;
+
   registerForm: FormGroup;
   isSubmitted = false;
   constructor(
@@ -33,7 +32,7 @@ export class AddBusUnityComponent {
     private accountService: AccountService,
     private busUnityService: BusUnitService
   ) {
-    this.currentUser = this.accountService.getCurrentUser();
+
     this.registerForm = this.fb.group({
       driver: ['', Validators.required],
       bus: ['', Validators.required],

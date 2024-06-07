@@ -2,7 +2,6 @@ import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {MatButton} from "@angular/material/button";
 import {MatTableModule} from "@angular/material/table";
 import {UserProfileCardComponent} from "../../../../shared/components/user-profile-card/user-profile-card.component";
-import {UserProfileCardInformation} from "../../../../account/models/userProfileCardInformation";
 import {AccountService} from "../../../../account/service/account.service";
 import {Router, RouterOutlet} from "@angular/router";
 import {DriversService} from "../../../service/drivers.service";
@@ -43,15 +42,12 @@ export class DriverAdministrationComponent implements OnInit{
   paginatedDrivers:Driver[]=[];
   pageSize=6;
 
-  currentUser:UserProfileCardInformation;
-
   constructor(
     private router:Router,
     private accountService:AccountService, 
     private driversService:DriversService,
     private location: Location
   ) {
-    this.currentUser= this.accountService.getCurrentUser()
   }
 
   ngOnInit(){

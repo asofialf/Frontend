@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, forkJoin, map } from 'rxjs';
 import { Departure } from '../models/departure';
-import { DepartureSchedule } from '../models/departure_schedule';
+import { DepartureSchedule } from '../models/departure-schedule';
 
 @Injectable({
   providedIn: 'root',

@@ -12,14 +12,14 @@ import {
 } from '@angular/material/datepicker';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map } from 'rxjs/operators';
-import { DepartureSchedule } from '../../../models/departure_schedule';
+import { DepartureSchedule } from '../../../models/departure-schedule';
 import { DepartureService } from '../../../service/departure.service';
 import { Departure } from '../../../models/departure';
-import { DepartureScheduleDisplay } from '../../../models/departure_schedule_display';
+import { DepartureScheduleDisplay } from '../../../models/departure-schedule-display';
 import { DriversService} from "../../../service/drivers.service";
 import {Driver} from "../../../models/driver";
 import { BusUnitService } from '../../../service/bus-unit.service';
-import { BusUnit } from '../../../models/bus_unit';
+import { BusUnit } from '../../../models/bus-unit';
 
 import { Bus } from '../../../models/bus';
 
