@@ -7,8 +7,10 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import {MatCardModule} from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 
+import { BackButtonComponent } from '../../../shared/components/back-button/back-button.component';
 import { TransportCompanyService } from '../../service/transport-company.service';
 import { TransportCompany } from '../../models/transport-company';
+import { RouterOutlet, RouterLink, Router  } from '@angular/router';
 
 @Component({
   selector: 'app-transport-company',
@@ -20,7 +22,10 @@ import { TransportCompany } from '../../models/transport-company';
     ReactiveFormsModule, 
     MatToolbarModule,
     MatCardModule,
-    MatButtonModule
+    MatButtonModule,
+    RouterOutlet,
+    RouterLink,
+    BackButtonComponent
   ],
   templateUrl: './transport-company.component.html',
   styleUrl: './transport-company.component.scss'
@@ -31,7 +36,8 @@ export class TransportCompanyComponent {
 
   constructor(
     private fb: FormBuilder,
-    private transportCompanyService: TransportCompanyService
+    private transportCompanyService: TransportCompanyService,
+    private router:Router
   ) { 
     this.transportCompanyForm = this.fb.group({
       name: ['', Validators.required],
@@ -42,13 +48,15 @@ export class TransportCompanyComponent {
   }
 
   createTransportCompany() {
-    this.transportCompanyService.addTransportCompany(this.transportCompanyForm.value).subscribe(
-      (res) => {
-        console.log(res);
-      },
-      (error) => {
-        console.log(error);
-      }
-    )
+    if (this.transportCompanyForm.valid) {
+      this.transportCompanyService.addTransportCompany(this.transportCompanyForm.value).subscribe(
+        (res) => {
+          this.router.navigate(['/sign-in']);
+        },
+        (error) => {
+          console.log(error);
+        }
+      )
+    }
   }
 }

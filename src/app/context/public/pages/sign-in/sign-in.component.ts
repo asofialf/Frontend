@@ -43,16 +43,18 @@ export class SignInComponent {
   }
 
   signIn() {
-    this.authService.login(this.signInForm.value).subscribe(
-      (response) => {
-        this.tokenService.setToken(response.access_token);
-        this.tokenService.setUserId(response.user_id);
-        this.router.navigate(['/home']);
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+    if (this.signInForm.valid) {
+      this.authService.login(this.signInForm.value).subscribe(
+        (response) => {
+          this.tokenService.setToken(response.access_token);
+          this.tokenService.setUserId(response.user_id);
+          this.router.navigate(['/home']);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    }
   }
 
 }
