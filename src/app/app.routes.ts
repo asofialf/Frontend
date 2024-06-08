@@ -71,24 +71,15 @@ export const routes: Routes = [
                   title:'Add New Driver',
                   loadComponent:()=> import("./context/planification/pages/bus-fleet/driver-register/driver-register.component").then(m=>m.DriverRegisterComponent)
                 },
-
-
-
               ]
             }
           ]
         },
-
-
-
         {
           path:':id/heartbeat-analytics',
           title:'Driver Details',
           loadComponent:()=> import("./context/monitoring/pages/hearbeat/heartbeat-analytics.component").then(m=>m.HeartbeatAnalyticsComponent)
         },
-
-
-        
         {
           path: 'itinerary',
           title: 'Itinerary Detail',
@@ -116,18 +107,18 @@ export const routes: Routes = [
           path: 'departure-schedule',
           title: 'Departure Schedule',
           loadComponent: () => import('./context/planification/pages/departure-schedule/departure-schedule-list/departure-schedule-list.component').then(m=>m.DepartureScheduleListComponent),
-          /*children: [
-            {
-              path: 'create-new-departure-schedule',
-              title: 'Create new departure schedule',
-              loadComponent: () => import('./context/planification/interface/pages/departure-schedule/create-new-departure-schedule/create-new-departure-schedule.component').then(m=>m.CreateNewDepartureScheduleComponent)
-            },
-          ]*/
+          children: [
+/*             {
+              path: 'create-new-schedule',
+              title: 'Create new schedule',
+              loadComponent: () => import('./context/planification/pages/departure-schedule/new-schedule/new-schedule.component').then(m=>m.NewScheduleComponent)
+            }, */
+          ]
         },
         {
-          path: 'create-new-departure-schedule',
-          title: 'Create new departure schedule',
-          loadComponent: () => import('./context/planification/pages/departure-schedule/create-new-departure-schedule/create-new-departure-schedule.component').then(m=>m.CreateNewDepartureScheduleComponent)
+          path: 'create-new-schedule',
+          title: 'Create new schedule',
+          loadComponent: () => import('./context/planification/pages/departure-schedule/new-schedule/new-schedule.component').then(m=>m.NewScheduleComponent)
         },
       ]
   },
