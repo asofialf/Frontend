@@ -1,5 +1,5 @@
 import { Bus } from "./bus";
-import { BusUnit } from "./bus_unit";
+import { BusUnit } from "./bus-unit";
 import { Driver } from "./driver";
 
 export interface BusUnitView {

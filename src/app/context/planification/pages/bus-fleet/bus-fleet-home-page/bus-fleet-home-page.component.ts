@@ -3,8 +3,6 @@ import {MatButton} from "@angular/material/button";
 import {MatCard, MatCardContent} from "@angular/material/card";
 import {UserProfileCardComponent} from "../../../../shared/components/user-profile-card/user-profile-card.component";
 import {Router, RouterLink, RouterOutlet} from '@angular/router';
-import {AccountService} from "../../../../account/service/account.service";
-import {UserProfileCardInformation} from "../../../../account/models/userProfileCardInformation";
 
 @Component({
   selector: 'app-bus-fleet-home-page',
@@ -22,10 +20,7 @@ import {UserProfileCardInformation} from "../../../../account/models/userProfile
 })
 export class BusFleetHomePageComponent {
 
-  currentUser:UserProfileCardInformation;
-
-  constructor(private router:Router,private accountService:AccountService) {
-    this.currentUser= this.accountService.getCurrentUser()
+  constructor(private router:Router) {
   }
 
   navigateToBusFleet(): void {

@@ -10,7 +10,7 @@ import { DepartureService } from '../../../service/departure.service';
 import { DriversService } from '../../../service/drivers.service';
 import { BusUnitService } from '../../../service/bus-unit.service';
 
-import { DepartureScheduleDisplay } from '../../../models/departure_schedule_display';
+import { DepartureScheduleDisplay } from '../../../models/departure-schedule-display';
 import { Departure } from '../../../models/departure';
 import { DepartureEditDialogComponent } from '../departure-edit-dialog/departure-edit-dialog.component';
 
@@ -26,7 +26,7 @@ const BUS_TEMPLATE: Bus[] = [
     totalCapacity: 10,
     year: 2024,
     state: "good",
-    user: 1
+    userId: 1
   },
   {
     id: 2,
@@ -35,7 +35,7 @@ const BUS_TEMPLATE: Bus[] = [
     totalCapacity: 10,
     year: 2024,
     state: "good",
-    user: 1
+    userId: 1
   }
 ];
 
@@ -71,11 +71,11 @@ export class DepartureScheduleTableComponent implements OnInit {
   private loadDepartureScheduleDisplays() {
     // Placeholder: logic to reload schedules.
     const departureSchedules$ = this.departureService.getDepartureSchedules();
-    const busUnits$ = this.busUnitService.getBusUnits(1);
+    const busUnits$ = this.busUnitService.getAllBusUnits();
     const drivers$ = this.driversService.getAllDrivers();
     const buses$ = of(BUS_TEMPLATE);
 
-    combineLatest([departureSchedules$, busUnits$, drivers$, buses$])
+/*     combineLatest([departureSchedules$, busUnits$, drivers$, buses$])
       .pipe(
         map(([departureSchedules, busUnits, drivers, buses]) => {
           return departureSchedules.map((schedule) => {
@@ -105,7 +105,7 @@ export class DepartureScheduleTableComponent implements OnInit {
         next: (data) => (this.departureScheduleDisplays = data),
         error: (err) => console.log(err),
       });
-
+ */
     console.log('Schedules reloaded');
   }
 

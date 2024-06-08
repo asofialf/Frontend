@@ -3,11 +3,17 @@ import { Routes } from '@angular/router';
 export const routes: Routes = [
         {
         path: 'sign-in',
+        title: 'Sign In',
         loadComponent: () => import('./context/public/pages/sign-in/sign-in.component').then(m=>m.SignInComponent),
         },
         {
         path: 'sign-up',
+        title: 'Sign Up',
         loadComponent: () => import('./context/public/pages/sign-up/sign-up.component').then(m=>m.SignUpComponent),
+        },
+        {
+          path:'create-transport-company',
+          loadComponent: () => import('./context/planification/pages/transport-company/transport-company.component').then(m=>m.TransportCompanyComponent),
         },
         {    
           path: '',
@@ -17,8 +23,11 @@ export const routes: Routes = [
             path:'home',
             title:'Home',
             loadComponent: ()=>import('./context/monitoring/pages/dashboard/dashboard.component').then(m=>m.DashboardComponent)
-          }
-        ,
+          },
+          {
+            path:'profile',
+            loadComponent: () => import('./context/account/pages/profile/profile.component').then(m=>m.ProfileComponent),
+          },
         {
           path:'bus-fleet',
           children:[
@@ -38,18 +47,8 @@ export const routes: Routes = [
                 {
                   path:'',
                   title:'Unity',
-                  loadComponent:()=> import("./context/planification/pages/bus-unity/bus-unity-list/bus-unity-list.component").then(m=>m.BusUnityListComponent)
-                },
-                {
-                  path:'add-bus-unit',
-                  title:'Add Bus Unit',
-                  loadComponent:()=> import("./context/planification/pages/bus-unity/add-bus-unity/add-bus-unity.component").then(m=>m.AddBusUnityComponent)
-                },
-                {
-                  path:'edit-bus-unit',
-                  title:'Edit Bus Unit',
-                  loadComponent:()=> import("./context/planification/pages/bus-unity/edit-bus-unity/edit-bus-unity.component").then(m=>m.EditBusUnityComponent)
-                },
+                  loadComponent:()=> import("./context/planification/pages/bus-fleet/bus-unity-list/bus-unity-list.component").then(m=>m.BusUnityListComponent)
+                }
               ]
             },
             {

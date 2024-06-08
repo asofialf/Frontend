@@ -4,7 +4,6 @@ import {MatButton} from "@angular/material/button";
 import {MatPaginator} from "@angular/material/paginator";
 import {Location, NgForOf, NgIf} from "@angular/common";
 import {UserProfileCardComponent} from "../../../../shared/components/user-profile-card/user-profile-card.component";
-import {UserProfileCardInformation} from "../../../../account/models/userProfileCardInformation";
 
 import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 
@@ -12,7 +11,6 @@ import { BackButtonComponent } from '../../../../shared/components/back-button/b
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 
-import {AccountService} from "../../../../account/service/account.service";
 import {DriversService} from "../../../service/drivers.service";
 import { TokenService } from '../../../../shared/services/token.service';
 @Component({
@@ -34,19 +32,16 @@ import { TokenService } from '../../../../shared/services/token.service';
   styleUrl: './driver-register.component.scss'
 })
 export class DriverRegisterComponent {
-  currentUser: UserProfileCardInformation;
   registerForm: FormGroup;
   isSubmitted=false;
 
   constructor(
     private location:Location,
     private fb: FormBuilder,
-    private accountService: AccountService,
     private driversService:DriversService,
     private tokenService: TokenService
   )
   {
-    this.currentUser = this.accountService.getCurrentUser();
     this.registerForm = this.fb.group({
       photoUrl: [''],
       firstName: ['', Validators.required],

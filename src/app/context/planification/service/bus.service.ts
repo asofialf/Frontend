@@ -32,11 +32,25 @@ export class BusService {
             .pipe(retry(3));
     }
 
-    updateBus(busData: any): Observable<Bus> {
+    createBus(busData: any): Observable<Bus> {
         const httpOptions = this.httpOptionsService.getHttpOptions();
         return this.http
-                .put<Bus>(`${this.baseUrl}/buses`, busData, httpOptions)
+            .post<Bus>(`${this.baseUrl}/register-bus`, busData, httpOptions)
+            .pipe(retry(3));
+    }
+
+    updateBus(busId: any, busData:any): Observable<Bus> {
+        const httpOptions = this.httpOptionsService.getHttpOptions();
+        return this.http
+                .put<Bus>(`${this.baseUrl}/bus?busId=${busId}&userId=${this.userId}`, busData, httpOptions)
                 .pipe(retry(3));
+    }
+
+    deleteBus(busId: any): Observable<any> {
+        const httpOptions = this.httpOptionsService.getHttpOptions();
+        return this.http
+            .patch<Bus>(`${this.baseUrl}/bus/delete`, busId, httpOptions)
+            .pipe(retry(3));
     }
     
 }

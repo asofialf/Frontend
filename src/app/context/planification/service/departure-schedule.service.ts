@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
-import {DepartureSchedule} from "../models/departure_schedule";
-import { DepartureScheduleDisplay } from '../models/departure_schedule_display';
+import {DepartureSchedule} from "../models/departure-schedule";
+import { DepartureScheduleDisplay } from '../models/departure-schedule-display';
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {Observable} from "rxjs";
 

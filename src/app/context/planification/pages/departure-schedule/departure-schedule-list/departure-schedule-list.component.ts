@@ -12,14 +12,14 @@ import {
 } from '@angular/material/datepicker';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map } from 'rxjs/operators';
-import { DepartureSchedule } from '../../../models/departure_schedule';
+import { DepartureSchedule } from '../../../models/departure-schedule';
 import { DepartureService } from '../../../service/departure.service';
 import { Departure } from '../../../models/departure';
-import { DepartureScheduleDisplay } from '../../../models/departure_schedule_display';
+import { DepartureScheduleDisplay } from '../../../models/departure-schedule-display';
 import { DriversService} from "../../../service/drivers.service";
 import {Driver} from "../../../models/driver";
 import { BusUnitService } from '../../../service/bus-unit.service';
-import { BusUnit } from '../../../models/bus_unit';
+import { BusUnit } from '../../../models/bus-unit';
 
 import { Bus } from '../../../models/bus';
 
@@ -95,12 +95,12 @@ export class DepartureScheduleListComponent implements OnInit {
 
   loadDepartureScheduleDisplays(): void {
     const departureSchedules$ = this.departureService.getDepartureSchedules();
-    const busUnits$ = this.busUnitService.getBusUnits(2);
+    const busUnits$ = this.busUnitService.getAllBusUnits();
     const drivers$ = this.driversService.getAllDrivers();
     const buses$ = this.busService.getAllBuses();
     let departuresByScheduleId: { [key: number]: Departure[] } = {};
 
-    combineLatest([departureSchedules$, busUnits$, drivers$, buses$])
+/*     combineLatest([departureSchedules$, busUnits$, drivers$, buses$])
       .pipe(
         map(([departureSchedules, busUnits, drivers, buses]) => {
           return departureSchedules.map(schedule => {
@@ -130,7 +130,7 @@ export class DepartureScheduleListComponent implements OnInit {
       .subscribe({
         next: data => (this.departureScheduleDisplays = data),
         error: err => console.log(err),
-      });
+      }); */
   }
 
   openDepartureDetails(schedule: DepartureScheduleDisplay) {

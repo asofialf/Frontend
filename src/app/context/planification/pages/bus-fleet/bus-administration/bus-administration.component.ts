@@ -1,7 +1,7 @@
 import {Component, Inject, Input, OnInit} from '@angular/core';
 import {MatTable, MatTableModule} from '@angular/material/table';
 import {Router, RouterOutlet} from "@angular/router";
-import {MatButton} from "@angular/material/button";
+import {MatButtonModule } from "@angular/material/button";
 import {MatDividerModule} from '@angular/material/divider';
 import { MatDialog, MatDialogModule} from '@angular/material/dialog';
 import {MatIconModule} from '@angular/material/icon';
@@ -19,7 +19,7 @@ import { BusService } from '../../../service/bus.service';
   imports: [
     MatTableModule,
     RouterOutlet,
-    MatButton,
+    MatButtonModule,
     BackButtonComponent,
     MatDividerModule,
     MatDialogModule,
@@ -32,7 +32,7 @@ import { BusService } from '../../../service/bus.service';
 export class BusAdministrationComponent implements OnInit{
 
 
-  displayedColumns: string[] = ['licensePlate', 'year', 'seatCapacity','totalCapacity', 'actions'];
+  displayedColumns: string[] = ['licensePlate', 'year','totalCapacity', 'actions'];
   dataSource = [] as Bus[];
   isEdit = false;
 
@@ -48,11 +48,15 @@ export class BusAdministrationComponent implements OnInit{
 
   openDialog(element?: Bus): void {
     this.isEdit = !!element;
-    this.dialog.open(ModalBusComponent, {
+    const dialogRef = this.dialog.open(ModalBusComponent, {
       data: {
         isEdit: this.isEdit,
         bus: element || {}
       }
+    });
+
+    dialogRef.componentInstance.busUpdated.subscribe(() => {
+      this.loadBuses();
     });
   }
 
@@ -63,8 +67,11 @@ export class BusAdministrationComponent implements OnInit{
   }
 
   deleteBus(element: Bus) {
-    throw new Error('Method not implemented.');
+    const busId={
+      busId: element.id
+    }
+    this.busService.deleteBus(busId).subscribe(() => {
+      this.loadBuses();
+    });
   }
-
-
 }
