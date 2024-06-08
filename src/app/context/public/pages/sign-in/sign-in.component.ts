@@ -26,7 +26,7 @@ import { RouterOutlet, RouterLink  } from '@angular/router';
   templateUrl: './sign-in.component.html',
   styleUrl: './sign-in.component.scss'
 })
-export class SignInComponent {
+export default class SignInComponent {
 
   signInForm: FormGroup
 
