@@ -15,7 +15,7 @@ export const routes: Routes = [
     path: 'create-transport-company',
     loadComponent: () => import('./context/planification/pages/transport-company/transport-company.component').then(m => m.TransportCompanyComponent),
   },
-  {
+/*   {
     path: '',
     loadComponent: () => import('./context/shared/pages/main-layout/main-layout.component').then(m => m.default),
     children: [
@@ -106,7 +106,7 @@ export const routes: Routes = [
         loadComponent: () => import('./context/planification/pages/departure-schedule/new-schedule/new-schedule.component').then(m => m.NewScheduleComponent)
       },
     ]
-  },
+  }, */
   {
     path: '**',
     redirectTo: '/sign-in'
