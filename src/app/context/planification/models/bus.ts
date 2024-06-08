@@ -5,7 +5,7 @@ export class Bus {
   totalCapacity: number;
   year: number;
   state: string;
-  user: number;
+  userId: number;
 
   constructor(
     id: number = 0,
@@ -14,7 +14,7 @@ export class Bus {
     totalCapacity: number = 0,
     year: number = 0,
     state: string = '',
-    user: number = 0,
+    userId: number = 0,
   ) {
     this.id = id;
     this.licensePlate = licensePlate;
@@ -22,6 +22,6 @@ export class Bus {
     this.totalCapacity = totalCapacity;
     this.year = year;
     this.state = state;
-    this.user = user;
+    this.userId = userId;
   }
 }

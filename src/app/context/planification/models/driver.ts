@@ -8,6 +8,7 @@ export class Driver {
   phoneNumber: string;
   email: string;
   user: number;
+  isDeleted: boolean;
 
   constructor(
     id: number = 0,
@@ -19,6 +20,7 @@ export class Driver {
     phoneNumber: string = '',
     email: string = '',
     user: number =0,
+    isDeleted: boolean = false,
   ) {
     this.id = id;
     this.firstName = firstName;
@@ -29,6 +31,7 @@ export class Driver {
     this.phoneNumber = phoneNumber;
     this.email = email;
     this.user = user;
+    this.isDeleted = isDeleted;
   }
 
   get fullName(): string {
@@ -46,6 +49,7 @@ export class Driver {
       json.phoneNumber,
       json.email,
       json.user,
+      json.isDeleted,
     );
   }
 }

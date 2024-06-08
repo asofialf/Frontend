@@ -4,41 +4,27 @@ $edit-button-color: #2F80ED;
 $delete-button-color: #990000;
 
 h1{
-    color: var(--color-primary)
-  }
+  color: var(--color-primary);
+  font-family: 'Urbanist', sans-serif;
+  font-weight: bold;
+} 
   
 p{
     color: var(--color-primary)
 }
-.search-bus-unity-driver{
-  padding: 5px;
-}
-.search-bus-unity-license{
-  padding: 5px;
-  margin-right: 10px;
-}
-.add-unit-button {
-    background-color: var(--color-primary);
-    color: white;
-    border-radius: 20px;
-    padding: 20px 20px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-    align-self: flex-end;
-    margin-bottom: 10px;
-    max-width: 200px;
-    font-family: inherit;
 
+.add-unit-button {
+    cursor: pointer;
     &:hover {
-      background-color: darken($primary-color, 10%);
+      background-color: darken($primary-color, 20%);
     }
 }
-.edit-button{
-  background-color: var(--color-primary);
-  margin-right: 10px;
+
+.formgroup-inline .field {
+  margin-right: 0rem;
 }
-.delete-button{
-  color: #990000;
-  margin-right: 10px;
+
+tr.mat-mdc-header-row {
+  background-color: var(--color-primary);
+  color: white;
 }

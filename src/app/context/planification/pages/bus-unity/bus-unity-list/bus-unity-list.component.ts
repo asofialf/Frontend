@@ -1,104 +1,114 @@
 import { Component, OnInit } from '@angular/core';
-import {FormsModule} from '@angular/forms';
+import {FormBuilder, FormGroup, FormsModule} from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatSelectModule} from '@angular/material/select';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatTableModule } from '@angular/material/table';
 import { Router, ActivatedRoute } from '@angular/router';
-import { DriversService } from '../../../service/drivers.service';
-import { BusUnitService } from '../../../service/bus-unit.service';
-import { AccountService } from '../../../../account/service/account.service';
 import {MatButtonModule} from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
+import {MatDividerModule} from '@angular/material/divider';
+
 import { Driver } from '../../../models/driver';
 import { BusUnit } from '../../../models/bus-unit';
-import { UserProfile } from '../../../../account/models/user-profile';
 import { Bus } from '../../../models/bus';
-import { BusService } from '../../../service/bus.service';
+import { NewUnitBus } from '../../../models/new-unit-bus';
 
+import { BusService } from '../../../service/bus.service';
+import { DriversService } from '../../../service/drivers.service';
+import { BusUnitService } from '../../../service/bus-unit.service';
+import { TokenService } from '../../../../shared/services/token.service';
+
+import { BackButtonComponent } from '../../../../shared/components/back-button/back-button.component';
 @Component({
   selector: 'app-bus-unity-list',
   standalone: true,
-  imports: [FormsModule, MatInputModule, MatSelectModule, MatFormFieldModule, MatTableModule, MatButtonModule, MatAutocompleteModule],
+  imports: [
+    FormsModule, 
+    MatInputModule, 
+    MatSelectModule, 
+    MatFormFieldModule, 
+    MatTableModule, 
+    MatButtonModule, 
+    MatAutocompleteModule,
+    BackButtonComponent,
+    MatIconModule,
+    CommonModule,
+    ReactiveFormsModule,
+    MatDividerModule
+  ],
   templateUrl: './bus-unity-list.component.html',
   styleUrls: ['./bus-unity-list.component.scss']
 })
 export class BusUnityListComponent implements OnInit {
 
   displayedColumns: string[] = ['driver_name', 'buses_license_plate', 'actions'];
-  dataSource: { driver_name: string; id: number; buses_id: number; drivers_id: number; transport_companies_id: number; }[] = [];
+  dataSource: BusUnit[] = [];
   drivers: Driver[] = [];
   buses: Bus[] = [];
-  userID: number;
-  filteredDrivers: Driver[] = [];
   selectedDriver: string = '';
+  busUnitForm: FormGroup;
+  newUnitBus: NewUnitBus;
 
   constructor(
     private busUnitService: BusUnitService,
     private driverService: DriversService,
+    private tokenService: TokenService,
     private router: Router,
     private route: ActivatedRoute,
+    private busService: BusService,
+    private fb: FormBuilder,
   ) {
-    this.userID = 2;
-  }
+    this.newUnitBus = new NewUnitBus();
+    this.busUnitForm = this.fb.group({
+      driverId: [''],
+      busId: ['']
+    });
+  } 
 
   ngOnInit() {
     this.loadDrivers();
+    this.loadBuses();
+    this.loadBusUnits();
   }
 
   loadDrivers(): void {
     this.driverService.getAllDrivers().subscribe({
       next: (data) => {
         this.drivers = data;
-        this.filteredDrivers = data;
-        this.loadBusUnits();
       },
       error: (err) => console.error('Error fetching drivers:', err)
     });
   }
 
+  loadBuses(): void {
+    this.busService.getAllBuses().subscribe({
+      next: (data) => {
+        this.buses = data;
+      },
+      error: (err) => console.error('Error fetching buses:', err)
+    });
+  }
+
+  busUnitSubmit() {
+    this.busUnitForm.value.userId = this.tokenService.getUserId();
+    this.busUnitService.createBusUnit(this.busUnitForm.value).subscribe({
+      next: (data) => {      
+        this.loadBusUnits();
+      },
+      error: (err) => console.error('Error creating bus unit:', err)
+    });
+  }
+
   loadBusUnits(): void {
-    this.busUnitService.getBusUnits(this.userID).subscribe({
-      next: (busUnits) => {
-        this.dataSource = busUnits.map(busUnit => {
-          const driver = this.drivers.find(d => d.id === busUnit.drivers_id);
-          //const bus = this.buses.find(d => d.id === busUnit.buses_id);
-          return {
-            ...busUnit,
-            driver_name: driver ? `${driver.firstName} ${driver.lastName}` : 'Unknown Driver'
-            //buses_license_plate: bus ? bus.license_plate : 'Unknown Bus'
-          };
-        });
+    this.busUnitService.getAllBusUnits().subscribe({
+      next: (data) => {
+        this.dataSource = data;
       },
       error: (err) => console.error('Error fetching bus units:', err)
     });
-  }
-
-  
-  
-  mapToBusUnit(item: any): BusUnit {
-    return {
-      id: item.id,
-      buses_id: item.bus.id,
-      drivers_id: item.driver.id,
-      transport_companies_id: 0 // Ajusta esto según tus necesidades
-    };
-  }
-
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    // this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
-
-  goToAddBusUnit(): void {
-    this.router.navigate(['add-bus-unit'], {
-      relativeTo: this.route,
-    });
-  }
-
-  goToEditBusUnit(): void {
-    this.router.navigate(['edit-bus-unit'], {
-      relativeTo: this.route,
-    });
-  }
+  }  
 }
