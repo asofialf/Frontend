@@ -1,20 +1,28 @@
+<mat-toolbar class="header">
+  <span class="my-5 mx-5">ChapaTuBus</span>
+</mat-toolbar>
 
-<form [formGroup]="transportCompanyForm" (ngSubmit)="createTransportCompany()">
-    <mat-form-field>
-      <mat-label>Nombre</mat-label>
-      <input matInput formControlName="name">
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Imagen de bus</mat-label>
-      <input matInput formControlName="busImageUrl">
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Imagen de logo</mat-label>
-      <input matInput formControlName="logoImageUrl">
-    </mat-form-field>
-    <mat-form-field>
-      <mat-label>Descripción</mat-label>
-      <input matInput formControlName="description">
-    </mat-form-field>
-      <button mat-raised-button color="primary" type="submit">Create</button>
-  </form>
+<div class="container">
+  <mat-card class="company-card">
+      <h1 class="title my-8">Register your transport company</h1>
+      <form [formGroup]="transportCompanyForm" (ngSubmit)="createTransportCompany()" class="form mx-5">
+        <mat-form-field appearance="outline">
+          <mat-label>Nombre</mat-label>
+          <input matInput formControlName="name">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Imagen de bus</mat-label>
+          <input matInput formControlName="busImageUrl">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Imagen de logo</mat-label>
+          <input matInput formControlName="logoImageUrl">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Descripción</mat-label>
+          <textarea  matInput formControlName="description"></textarea>
+        </mat-form-field>
+        <button mat-raised-button color="primary" type="submit" class="mb-3">Create</button>
+      </form>
+    </mat-card>
+</div>

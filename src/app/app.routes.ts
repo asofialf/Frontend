@@ -3,10 +3,12 @@ import { Routes } from '@angular/router';
 export const routes: Routes = [
         {
         path: 'sign-in',
+        title: 'Sign In',
         loadComponent: () => import('./context/public/pages/sign-in/sign-in.component').then(m=>m.SignInComponent),
         },
         {
         path: 'sign-up',
+        title: 'Sign Up',
         loadComponent: () => import('./context/public/pages/sign-up/sign-up.component').then(m=>m.SignUpComponent),
         },
         {
@@ -45,18 +47,8 @@ export const routes: Routes = [
                 {
                   path:'',
                   title:'Unity',
-                  loadComponent:()=> import("./context/planification/pages/bus-unity/bus-unity-list/bus-unity-list.component").then(m=>m.BusUnityListComponent)
-                },
-                {
-                  path:'add-bus-unit',
-                  title:'Add Bus Unit',
-                  loadComponent:()=> import("./context/planification/pages/bus-unity/add-bus-unity/add-bus-unity.component").then(m=>m.AddBusUnityComponent)
-                },
-                {
-                  path:'edit-bus-unit',
-                  title:'Edit Bus Unit',
-                  loadComponent:()=> import("./context/planification/pages/bus-unity/edit-bus-unity/edit-bus-unity.component").then(m=>m.EditBusUnityComponent)
-                },
+                  loadComponent:()=> import("./context/planification/pages/bus-fleet/bus-unity-list/bus-unity-list.component").then(m=>m.BusUnityListComponent)
+                }
               ]
             },
             {
