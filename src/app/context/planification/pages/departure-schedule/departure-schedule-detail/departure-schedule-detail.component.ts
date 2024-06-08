@@ -1,6 +1,6 @@
 import { Component, Inject, Input, Output, EventEmitter } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Departure } from '../../../models/departure';
+import { Departure } from '../../../models/schedule';
 import { CommonModule } from '@angular/common';
 
 @Component({

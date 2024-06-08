@@ -1,159 +1,71 @@
 import { Component,OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import {
-  MatDatepicker,
-  MatDatepickerInput,
-  MatDatepickerModule,
-  MatDatepickerToggle,
-} from '@angular/material/datepicker';
+import { MatTableModule} from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
-import { map } from 'rxjs/operators';
-import { DepartureSchedule } from '../../../models/departure-schedule';
-import { DepartureService } from '../../../service/departure.service';
-import { Departure } from '../../../models/departure';
-import { DepartureScheduleDisplay } from '../../../models/departure-schedule-display';
-import { DriversService} from "../../../service/drivers.service";
-import {Driver} from "../../../models/driver";
-import { BusUnitService } from '../../../service/bus-unit.service';
-import { BusUnit } from '../../../models/bus-unit';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatIconModule} from '@angular/material/icon';
+
 
 import { Bus } from '../../../models/bus';
-
-import {combineLatest, of} from "rxjs";
-import {DepartureScheduleDetailComponent} from "../departure-schedule-detail/departure-schedule-detail.component";
-import { DepartureScheduleTableComponent } from '../../../components/departure-schedule/departure-schedule-table/departure-schedule-table.component';
-import { BusService } from '../../../service/bus.service';
-
+import { Schedule } from '../../../models/schedule';  
+import { ScheduleService } from '../../../service/schedule.service';
+import { RouterLink, RouterOutlet} from '@angular/router';
 @Component({
   selector: 'app-departure-schedule-list',
   standalone: true,
   imports: [
     CommonModule,
     MatFormFieldModule,
-    MatDatepickerModule,
-    MatDatepicker,
-    MatDatepickerInput,
-    MatDatepickerToggle,
+    MatTableModule,
     MatInputModule,
     MatButtonModule,
-    DepartureScheduleDetailComponent,
-    DepartureScheduleTableComponent
+    MatDividerModule,
+    MatIconModule,
+    RouterOutlet,
+    RouterLink
   ],
   templateUrl: './departure-schedule-list.component.html',
   styleUrls: ['./departure-schedule-list.component.scss'],
 })
 export class DepartureScheduleListComponent implements OnInit {
-  openedAccordion: DepartureScheduleDisplay | null = null;
+
+
   buses: Bus[] = [];
-
-  toggleAccordion(schedule: DepartureScheduleDisplay) {
-    const departures$ = this.departureService.getDepartures(schedule.id);
-
-    departures$.subscribe(departures => {
-      console.log('Departures for schedule', schedule.id, ':', departures);
-      schedule.departures = departures;
-      this.openedAccordion = this.openedAccordion === schedule ? null : schedule;
-      console.log('Opened Accordion:', this.openedAccordion);
-    });
-  }
-  departureScheduleDisplays: DepartureScheduleDisplay[] = [];
-  dialog?: MatDialog;
+  dataSource: Schedule[] = [];
+  displayedColumns: string[] = ['description', 'date', 'actions'];
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private departureService: DepartureService,
-    private driversService: DriversService,
-    private busService: BusService,
-    private busUnitService: BusUnitService,
-    matDialog: MatDialog // Rename the parameter
+    private scheduleService: ScheduleService
   ) {
-    this.dialog = matDialog;
   }
 
   ngOnInit() {
-    this.loadDepartureScheduleDisplays();
-    this.loadBuses();
+    this.loadSchedules();
+
   }
 
-  loadBuses(){
-    this.busService.getAllBuses().subscribe({
-      next: (data) => {
-        this.buses = data;
-      },
-      error: (err) => console.error('Error fetching buses:', err)
+  loadSchedules(): void {
+    this.scheduleService.getAllSchedules().subscribe((schedules) => {
+      this.dataSource = schedules;
     });
   }
 
-  getBusByID(busId: number): Bus | undefined {
-    return this.buses.find(bus => bus.id === busId);
+
+  goToCreateNewDepartureSchedule(): void{
+    this.router.navigate(['create-new-schedule'])
   }
 
-  loadDepartureScheduleDisplays(): void {
-    const departureSchedules$ = this.departureService.getDepartureSchedules();
-    const busUnits$ = this.busUnitService.getAllBusUnits();
-    const drivers$ = this.driversService.getAllDrivers();
-    const buses$ = this.busService.getAllBuses();
-    let departuresByScheduleId: { [key: number]: Departure[] } = {};
-
-/*     combineLatest([departureSchedules$, busUnits$, drivers$, buses$])
-      .pipe(
-        map(([departureSchedules, busUnits, drivers, buses]) => {
-          return departureSchedules.map(schedule => {
-            const busUnit = busUnits.find(unit => unit.id === schedule.bus_unit_id);
-            const driver = drivers.find(driver => driver.id === busUnit?.drivers_id);
-            const bus = this.getBusByID(busUnit?.buses_id || 0);
-            // const departures$ = this.departureService.getDepartures(schedule.id);
-
-            // departures$.subscribe(departures => {
-            //   console.log('Departures for schedule', schedule.id, ':', departures);
-            //   departuresByScheduleId[schedule.id] = departures;
-            //   console.log(departuresByScheduleId);
-            // });
-
-            return {
-              id: schedule.id,
-              departure_date: schedule.departure_date,
-              bus_unit_id: schedule.bus_unit_id,
-              shift_start: schedule.shift_start,
-              driver: driver ? `${driver.firstName} ${driver.lastName}` : 'Unknown',
-              bus: bus ? bus.licensePlate : 'Unknown',
-              departures: [],
-            };
-          });
-        })
-      )
-      .subscribe({
-        next: data => (this.departureScheduleDisplays = data),
-        error: err => console.log(err),
-      }); */
+  goToDetails(element: any) {
+    throw new Error('Method not implemented.');
   }
 
-  openDepartureDetails(schedule: DepartureScheduleDisplay) {
-    if (this.dialog) {
-      const dialogRef = this.dialog.open(DepartureScheduleDetailComponent, {
-        data: {departures: schedule.departures},
-      });
-
-      dialogRef.componentInstance.deleteDeparture.subscribe((departureId: number) => {
-        const departureToDelete = (schedule.departures as Departure[]).find(
-          (departure: Departure) => departure.id === departureId
-        );
-
-        if (departureToDelete) {
-          const departureIndex = schedule.departures.indexOf(departureToDelete);
-          schedule.departures.splice(departureIndex, 1);
-        }
-      });
-    }
+  deleteBus(element: any) {
+    throw new Error('Method not implemented.');
   }
-  goToCreateNewDepartureSchedule(){
-    this.router.navigate(['create-new-departure-schedule'], {
-      relativeTo: this.route,
-    });
-  }
+    
 }

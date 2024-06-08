@@ -30,8 +30,7 @@ import { BusService } from '../../../service/bus.service';
 })
 
 export class BusAdministrationComponent implements OnInit{
-
-
+  
   displayedColumns: string[] = ['licensePlate', 'year','totalCapacity', 'actions'];
   dataSource = [] as Bus[];
   isEdit = false;

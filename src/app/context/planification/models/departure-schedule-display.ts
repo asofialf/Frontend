@@ -1,4 +1,4 @@
-import {Departure} from "./departure";
+import {Schedule} from "./schedule";
 
 export interface DepartureScheduleDisplay {
   id: number;
@@ -7,5 +7,5 @@ export interface DepartureScheduleDisplay {
   shift_start: string;
   driver: string;
   bus: string;
-  departures: Departure[];
+  departures: Schedule[];
 }
