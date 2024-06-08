@@ -4,7 +4,6 @@ export const routes: Routes = [
 
   {
     path: '',
-    loadComponent: () => import('./context/shared/pages/main-layout/main-layout.component').then(m => m.default),
     children: [
       {
         path: 'sign-in',
